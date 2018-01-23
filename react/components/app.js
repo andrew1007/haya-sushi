@@ -45,6 +45,7 @@ class AppPresentational extends Component {
     return (
       <div style={appStyle}>
         <AppHeader {...appHeaderProps}/>
+        {'asdfddddddddddddd\nasddddddddddddddddddd'}
         <div style={contentStyle}>
           <SideBar/>
           <MenuSection {...menuSectionProps}/>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122212459) do
+ActiveRecord::Schema.define(version: 20180123214547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,14 @@ ActiveRecord::Schema.define(version: 20180122212459) do
   end
 
   create_table "sections", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name",                     null: false
+    t.string "description", default: ""
+  end
+
+  create_table "subsections", force: :cascade do |t|
+    t.string "name",                     null: false
+    t.string "description", default: ""
+    t.index ["name"], name: "index_subsections_on_name", using: :btree
   end
 
 end
