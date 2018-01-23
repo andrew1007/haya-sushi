@@ -6,7 +6,7 @@ const MenuSectionItemList = props => {
   const menuItems = items.map((item) => {
     let {id, description, name, price, spiciness} = item
     let menuSectionItemProps = {id, description, name, price, spiciness}
-    return <div key={id}><MenuSectionItem {...menuSectionItemProps}/></div>
+    return <MenuSectionItem key={id} {...menuSectionItemProps}/>
   })
 
   return (

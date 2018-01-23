@@ -4,8 +4,8 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 
 const Section = props => {
+  const { classes } = props
   const list = props.list.map((name, idx) => {
-    const { classes } = props
     const style = {
       color: 'red'
     }
@@ -17,7 +17,6 @@ const Section = props => {
       </div>
     )
   })
-  // <ListItemText disableTypography className={classes.text} primary={name}/>
   return (
     <List color='primary'>
       {list}
@@ -27,7 +26,6 @@ const Section = props => {
 
 const styles = theme => ({
   button: {
-    width: '100%',
     maxWidth: '100px',
     backgroundColor: theme.palette.primary.dark,
     padding: '10px',

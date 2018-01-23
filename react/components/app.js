@@ -7,32 +7,41 @@ import MenuSection from './menu_section/menu_section'
 
 class AppPresentational extends Component {
 
-  componentWillMount() {
-    this.props.getSections()
+  constructor() {
+    super()
+    this.state = {
+      sectionIdx: 0,
+      menu: []
+    }
   }
 
-  handleClick = () => {
-    alert('clicked')
+  async componentWillMount() {
+    await this.props.getSections()
+    const menuArr = Object.values(this.props.menu).slice(1)
+    this.setState({menu: menuArr, sectionIdx: 4})
+  }
+
+  handleSectionClick = (name) => {
+    this.setState({currentSection: name})
   }
 
   render() {
-    console.log(this.props);
-    const menu = this.props.menu
     const appHeaderProps = {
       handleClick: this.handleClick
     }
     const appStyle = {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
     }
     const contentStyle = {
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginLeft: '30px'
     }
+    const {sectionIdx, menu} = this.state
     const menuSectionProps = {
-      menuItems: menu['Appetizers']
+      menuItems: menu[sectionIdx]
     }
-    console.log(menu['Appetizers']);
     return (
       <div style={appStyle}>
         <AppHeader {...appHeaderProps}/>
@@ -40,7 +49,6 @@ class AppPresentational extends Component {
           <SideBar/>
           <MenuSection {...menuSectionProps}/>
         </div>
-        LANDING PAGE YES SUCCESS MANG
       </div>
     )
   }
