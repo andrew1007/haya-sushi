@@ -24,10 +24,10 @@ subsections_hash["Main Dishes"] = [
 ]
 
 subsections_hash["Sashimi & Nigiri"] = [
-  ["Sushi & Sashimi Combos", ""],
+  ["Sushi & Sashimi Combos", "*Chef's choice. No Substitutions*"],
   ["Haya Sushi Boat", ""],
   ["Nigiri", ""],
-  ["Sashimi Plates", ""]
+  ["Sashimi Plates", "*Extra charge for substitutions"]
 ]
 
 subsections_hash["Rolls"] = [
@@ -96,7 +96,8 @@ items_hash['Desserts'] = [
 ]
 
 items_hash.each do |section, items|
-  section_id = Section.find_by({name: section})
+  subsection_id = Subsection.find_by({name: section})
+  section_id = Section.find_by({name: "Main Dishes"})
   items.each do |item|
     name, description, price, spiciness = item
     next if Item.find_by({name: name})
@@ -104,7 +105,9 @@ items_hash.each do |section, items|
       name: name,
       description: description,
       price: price,
-      spiciness: spiciness
+      spiciness: spiciness,
+      subsection_id: subsection_id,
+      section_id: section_id
       })
   end
 end
@@ -179,25 +182,41 @@ sashimi_hash['Nigiri'] = [
 sashimi_hash['Sashimi Plates'] = [
   ["Sashimi P1", "(9 pcs Assorted Sashimi)", "15.49"],
   ["Sashimi P2", "(12 pcs Assorted Sashimi)", "20.49"],
-  ["Sashimi P3", "(16 pcs Assorted Sashimi)", "25.99"],
-  ["*Extra charge for substitutions", "", ""]
+  ["Sashimi P3", "(16 pcs Assorted Sashimi)", "25.99"]
 ]
 
-  sashimi_hash['Sushi and Sashimi Combos'] = [
-    ["Sushi No. 5", "(Nigiri (5 pcs) & Cali Roll)", "15.99"],
-    ["Sushi No. 10", "(Nigiri (10 pcs) & Cali Roll)", "22.99"],
-    ["Haya Sushi Combo", "(Nigiri (5 pcs), Sashimi (4 pcs) & Cali Roll)", "21.99"],
-    ["Chirashi", "(Assortment of Sushi Served w/ Sushi Rice)", "19.99"],
-    ["Unagi Don", "(BBQ Eel Served w/ Sushi Rice)", "16.99"],
-    ["*Chef's choice. No Substitutions*", "", ""]
-  ]
+sashimi_hash['Sushi and Sashimi Combos'] = [
+  ["Sushi No. 5", "(Nigiri (5 pcs) & Cali Roll)", "15.99"],
+  ["Sushi No. 10", "(Nigiri (10 pcs) & Cali Roll)", "22.99"],
+  ["Haya Sushi Combo", "(Nigiri (5 pcs), Sashimi (4 pcs) & Cali Roll)", "21.99"],
+  ["Chirashi", "(Assortment of Sushi Served w/ Sushi Rice)", "19.99"],
+  ["Unagi Don", "(BBQ Eel Served w/ Sushi Rice)", "16.99"]
+]
 
-  sashimi_hash['Haya Sushi Boat'] = [
-    ["Boat A: Nigiri (6pcs), Sashimi (12 pcs), Rolls (3)", "", "49.99"],
-    ["Boat B: Nigiri (12pcs), Sashimi (18 pcs), Rolls (6)", "", "99.99"]
-  ]
+sashimi_hash['Haya Sushi Boat'] = [
+  ["Boat A: Nigiri (6pcs), Sashimi (12 pcs), Rolls (3)", "", "49.99"],
+  ["Boat B: Nigiri (12pcs), Sashimi (18 pcs), Rolls (6)", "", "99.99"]
+]
 
-sashimi_hash['Temaki Hand Roll'] = [
+sashimi_hash.each do |subsection, items|
+  section_id = Section.find_by({name: "Sashimi & Nigiri"})
+  subsection_id = Subsection.find_by({name: subsection})
+  items.each do |item|
+    name, description, price, spiciness
+    next if Item.find_by({name: name})
+    Item.create!({
+      name: name,
+      description: description,
+      price: price,
+      spiciness: spiciness || 0,
+      section_id: section_id,
+      subsection_id: subsection_id
+      })
+  end
+end
+
+roll_hash = {}
+roll_hash['Temaki Hand Roll'] = [
   ["California Temaki", "(Avocado, Crabmix)", "8.49"],
   ["Hamachi Temaki", "(Hamachi, Avocado, Cucumber)", "9.49"],
   ["Hotate Temaki", "(Scallop, Spciy Mayo, Masago, Cucumber)", "9.49"],
@@ -209,7 +228,7 @@ sashimi_hash['Temaki Hand Roll'] = [
   ["Zig-Zag Temaki", "(D.F. Soft-shell Crab, Crabmix, Avocado, Masago, Soywrap)", "12.49"]
 ]
 
-sashimi_hash['Basic Rolls'] = [
+roll_hash['Basic Rolls'] = [
   ["Nigihama", "Hamachi, Green Onion", "8.49", 0],
   ["Teka Maki", "(Red Tuna)", "8.49", 0],
   ["Sake Maki", "(Salmon)", "8.49", 0],
@@ -224,16 +243,16 @@ sashimi_hash['Basic Rolls'] = [
   ["Spicy Tuna", "(Spicy Tuna, Cucumber)", "9.99", 1]
 ]
 
-  sashimi_hash['Vegetarian Rolls'] = [
-    ["Avo", "(Avocado)", "6.49"],
-    ["Avocu", "(Avocado, Cucumber)", "7.99"],
-    ["Kappa Maki", "(Cucumber)", "6.49"],
-    ["Futo Maki", "(Pickled Squash, Carrot, Pickled Radish, Cucumber & Stewed Mushrooms)", "9.99"],
-    ["Vegan", "(Cucumber, Avocado, Mushroom)", "8.99"],
-    ["Veggie Lover", "(Avocado, Cucumber, Pickled Radish, Kaiwari) Soywrap", "12.99"]
-  ]
+roll_hash['Vegetarian Rolls'] = [
+  ["Avo", "(Avocado)", "6.49"],
+  ["Avocu", "(Avocado, Cucumber)", "7.99"],
+  ["Kappa Maki", "(Cucumber)", "6.49"],
+  ["Futo Maki", "(Pickled Squash, Carrot, Pickled Radish, Cucumber & Stewed Mushrooms)", "9.99"],
+  ["Vegan", "(Cucumber, Avocado, Mushroom)", "8.99"],
+  ["Veggie Lover", "(Avocado, Cucumber, Pickled Radish, Kaiwari) Soywrap", "12.99"]
+]
 
-sashimi_hash['Deep Fried Rolls'] = [
+roll_hash['Deep Fried Rolls'] = [
   ["Hanako", "(Tuna, Salmon, Albacore, Avocado, Masago)", "17.49", 0],
   ["Ninja", "(Avocado, Cream Cheese, Salmon, Unagi)", "15.49", 0],
   ["Red Hot", "(Salmon, Cream Cheese, Spicy Crabmix)", "13.49", 1],
@@ -242,7 +261,7 @@ sashimi_hash['Deep Fried Rolls'] = [
   ["T-N-T", "(Avocado, Spicy Crabmix, Cream Cheese, White Fish, Spicy Tuna, Pepperfin Sauce, Masago, Green Onions)", "18.99", 1]
 ]
 
-sashimi_hash['House Rolls'] = [
+roll_hash['House Rolls'] = [
   ["Ace", "(D.F. Shrimp, Crabmix, Avocado, Tuna, Salmon, Masago)", "17.49", 0],
   ["Crazy", "(Albacore, Salmon, Tuna, Avocado, Cucumber)", "16.49", 0],
   ["Happy", "(D.F. Shrimp, Cucumber, Cream Cheese, Salmon, Lemon)", "16.49", 0],
@@ -278,19 +297,20 @@ sashimi_hash['House Rolls'] = [
   ["Fire Poppy", "(Avocado, Spicy Crabmix, D.F. Shrimp, Spicy Salmon, Spring Mix, Ruta Sauce, Pepperfin Sauce, Honey Wasabi, Soywrap)", "23.99", 1],
 ]
 
-charge = [
-  ["Deep Fry", "1.50"],
-  ["D.F. Shrimp", "2.00"],
-  ["Cream Cheese", "1.00"],
-  ["Soywrap", "1.00"],
-  ["Lemon", "0.50"],
-  ["Cucumber Wrap", "2.50"],
-  ["Avocado", "1.00"],
-  ["Masago", "1.00"],
-  ["Cucumber", "0.50"],
-  ["Jalapeno", "0.50"],
-  ["Extra Sauce", "0.50"]
-]
+roll_hash.each do |subsection, items|
+  section_id = Section.find_by({name: "Rolls"})
+  subsection_id = Subsection.find_by({name: subsection})
+  items.each do |item|
+    name, description, price, spiciness = item
+    next if Item.find_by({name: name})
+    Item.create!({
+      name: name,
+      description: description,
+      price: price,
+      spiciness: spiciness || 0
+      })
+  end
+end
 
 #Lunch Specials
 lunch_options = [
@@ -310,4 +330,19 @@ bento_options = [
 #Nigiri
 nigiri_options = [
   "*Ask for availability"
+]
+
+#Rolls
+charge = [
+  ["Deep Fry", "1.50"],
+  ["D.F. Shrimp", "2.00"],
+  ["Cream Cheese", "1.00"],
+  ["Soywrap", "1.00"],
+  ["Lemon", "0.50"],
+  ["Cucumber Wrap", "2.50"],
+  ["Avocado", "1.00"],
+  ["Masago", "1.00"],
+  ["Cucumber", "0.50"],
+  ["Jalapeno", "0.50"],
+  ["Extra Sauce", "0.50"]
 ]
