@@ -5,7 +5,7 @@ sections = [
   ["Main Dishes", ""],
   ["Beverages", ""],
   ["Side Orders", ""],
-  ["Deserts", ""],
+  ["Desserts", ""],
 ]
 sections.each do |section|
   name, description = section
@@ -27,7 +27,8 @@ subsections_hash["Sashimi & Nigiri"] = [
   ["Sushi & Sashimi Combos", "*Chef's choice. No Substitutions*"],
   ["Haya Sushi Boat", ""],
   ["Nigiri", ""],
-  ["Sashimi Plates", "*Extra charge for substitutions"]
+  ["Sashimi Plates", "*Extra charge for substitutions"],
+  ['Sushi and Sashimi Combos', ""]
 ]
 
 subsections_hash["Rolls"] = [
@@ -39,15 +40,17 @@ subsections_hash["Rolls"] = [
 ]
 
 
-subsections.each do |section, subsection_arr|
-  section_id = Section.find_by({name: section})
-  name, description = subsection
-  next if Subsection.find_by({name: subsection})
-  Subsection.create!({
-    name: name,
-    description: description,
-    section_id: section_id
-    })
+subsections_hash.each do |section, subsection_arr|
+  section_id = Section.find_by({name: section}).id
+  subsection_arr.each do |item|
+    name, description = item
+    next if Subsection.find_by({name: name})
+    Subsection.create!({
+      name: name,
+      description: description,
+      section_id: section_id
+      })
+  end
 end
 
 items_hash = {}
@@ -82,7 +85,7 @@ items_hash['Appetizers'] = [
     ["Chicken Karaage", "(Deep Fried Chicken Strips w/ Teriyaki Sauce)", '8.99', 0]
   ]
 
-items_hash['Side Order'] = [
+items_hash['Side Orders'] = [
   ["Miso Soup", "", '1.99', 0],
   ["Rice", "", '1.99', 0],
   ["Salad", "", '1.99, 0']
@@ -96,8 +99,10 @@ items_hash['Desserts'] = [
 ]
 
 items_hash.each do |section, items|
-  subsection_id = Subsection.find_by({name: section})
-  section_id = Section.find_by({name: "Main Dishes"})
+  if !Section.find_by({name: section})
+    debugger
+  end
+  section_id = Section.find_by({name: section}).id
   items.each do |item|
     name, description, price, spiciness = item
     next if Item.find_by({name: name})
@@ -106,7 +111,7 @@ items_hash.each do |section, items|
       description: description,
       price: price,
       spiciness: spiciness,
-      subsection_id: subsection_id,
+      subsection_id: nil,
       section_id: section_id
       })
   end
@@ -140,7 +145,7 @@ main_courses_hash['Noodle Dishes'] = [
   ["Vegetable Yaki Noodle & Chicken", "(Stir-fried Noodle, Mixed Vegetables & Chicken w/ Rice)", '11.99']
 ]
 
-main_courses_hash["Kid's menu"] = [
+main_courses_hash["Kid's Menu"] = [
   ["Chicken Teriyaki", "(Charbroiled Skinless Chicken)", '7.99'],
   ["Spicy Honey Chicken", "(Chicken Teriyaki, Pan-fried w/ Spicy Honey Sauce)", '8.49'],
   ["Spicy Popcorn Chicken", "(Popcorn Chicken w/ Spicy Honey Sauce)", '8.49' ]
@@ -153,9 +158,29 @@ main_courses_hash['Donburi'] = [
 ]
 
 main_courses_hash['Bento Box Combination'] = [
-  ["Haya 2 Item", '14.99'],
-  ["Haya 3 Item", '17.99']
+  ["Haya 2 Item", "", '14.99'],
+  ["Haya 3 Item", "", '17.99']
 ]
+
+main_courses_hash.each do |subsection, items|
+  section_id = Section.find_by({name: 'Main Dishes'}).id
+  if !Subsection.find_by({name: subsection})
+    debugger
+  end
+  subsection_id = Subsection.find_by({name: subsection}).id
+  items.each do |item|
+    name, description, price, spiciness = item
+    next if Item.find_by({name: name})
+    Item.create!({
+      name: name,
+      description: description,
+      subsection_id: subsection_id,
+      section_id: section_id,
+      spiciness: spiciness || 0,
+      price: price
+      })
+  end
+end
 
 sashimi_hash = {}
 sashimi_hash['Nigiri'] = [
@@ -199,10 +224,13 @@ sashimi_hash['Haya Sushi Boat'] = [
 ]
 
 sashimi_hash.each do |subsection, items|
-  section_id = Section.find_by({name: "Sashimi & Nigiri"})
-  subsection_id = Subsection.find_by({name: subsection})
+  section_id = Section.find_by({name: "Sashimi & Nigiri"}).id
+  if (!Subsection.find_by({name: subsection}))
+    debugger
+  end
+  subsection_id = Subsection.find_by({name: subsection}).id
   items.each do |item|
-    name, description, price, spiciness
+    name, description, price, spiciness = item
     next if Item.find_by({name: name})
     Item.create!({
       name: name,
@@ -216,7 +244,7 @@ sashimi_hash.each do |subsection, items|
 end
 
 roll_hash = {}
-roll_hash['Temaki Hand Roll'] = [
+roll_hash['Temaki - Hand Roll'] = [
   ["California Temaki", "(Avocado, Crabmix)", "8.49"],
   ["Hamachi Temaki", "(Hamachi, Avocado, Cucumber)", "9.49"],
   ["Hotate Temaki", "(Scallop, Spciy Mayo, Masago, Cucumber)", "9.49"],
@@ -298,8 +326,14 @@ roll_hash['House Rolls'] = [
 ]
 
 roll_hash.each do |subsection, items|
-  section_id = Section.find_by({name: "Rolls"})
-  subsection_id = Subsection.find_by({name: subsection})
+  if (!Section.find_by({name: "Rolls"}))
+    debugger
+  end
+  section_id = Section.find_by({name: "Rolls"}).id
+  if (!Subsection.find_by({name: subsection}))
+    debugger
+  end
+  subsection_id = Subsection.find_by({name: subsection}).id
   items.each do |item|
     name, description, price, spiciness = item
     next if Item.find_by({name: name})
@@ -307,7 +341,10 @@ roll_hash.each do |subsection, items|
       name: name,
       description: description,
       price: price,
-      spiciness: spiciness || 0
+      spiciness: spiciness || 0,
+      section_id: section_id,
+      subsection_id: subsection_id,
+      discount: true
       })
   end
 end

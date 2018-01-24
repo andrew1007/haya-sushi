@@ -7,7 +7,7 @@ class InitTables < ActiveRecord::Migration[5.0]
       t.integer :spiciness, default: 0
       t.integer :section_id, null: false
       t.integer :subsection_id
-      t.boolean :discount, default: true
+      t.boolean :discount, default: false
       t.timestamps
     end
 

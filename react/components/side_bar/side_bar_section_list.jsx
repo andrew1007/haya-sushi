@@ -4,14 +4,14 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 
 const Section = props => {
-  const { classes } = props
-  const list = props.list.map((name, idx) => {
+  const { classes, sections, handleSectionClick } = props
+  const list = sections.map((name, idx) => {
     const style = {
       color: 'red'
     }
     return (
       <div key={idx}>
-        <ListItem button className={classes.button} onClick={() => alert('seafsd')}>
+        <ListItem button className={classes.button} onClick={() => handleSectionClick(name)}>
           <ListItemText primary={name}/>
         </ListItem>
       </div>
@@ -26,7 +26,7 @@ const Section = props => {
 
 const styles = theme => ({
   button: {
-    maxWidth: '100px',
+    maxWidth: '200px',
     backgroundColor: theme.palette.primary.dark,
     padding: '10px',
   },

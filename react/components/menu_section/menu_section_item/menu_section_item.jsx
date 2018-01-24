@@ -10,12 +10,11 @@ const MenuSectionItem = props => {
   const itemPriceProps = {price}
   const itemNameStyle = {
     float: 'left',
-    width: '350px'
   }
-  const containerStyle= {
+  const containerStyle = {
     display: 'flex',
-    flexGrow: 1,
-    marginBottom: '10px'
+    marginBottom: '10px',
+    justifyContent: 'space-between'
   }
   return (
     <div style={containerStyle} key={props.id}>

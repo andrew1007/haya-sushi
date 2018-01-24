@@ -10,15 +10,18 @@ import MenuIcon from 'material-ui-icons/Menu';
 
 const AppHeader = props => {
   const { classes } = props
+  const style = {
+    borderBottom: '2px solid #EF5350'
+  }
   return (
-    <div className={classes.root}>
+    <div style={style}>
       <AppBar position="static">
         <Toolbar>
           <IconButton color="inherit" onClick={props.handleClick}>
             <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
-            HayaSushi
+            <h2>Haya Sushi</h2>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -29,6 +32,7 @@ const AppHeader = props => {
 const styles = {
   root: {
     width: '100%',
+    borderBottom: '2px solid #EF5350'
   },
   flex: {
     flex: 1,

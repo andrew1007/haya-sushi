@@ -10,15 +10,14 @@ class AppPresentational extends Component {
   constructor() {
     super()
     this.state = {
-      sectionIdx: 0,
-      menu: []
+      currentSection: 0,
     }
   }
 
   async componentWillMount() {
     await this.props.getSections()
-    const menuArr = Object.values(this.props.menu).slice(1)
-    this.setState({menu: menuArr, sectionIdx: 4})
+    const defaultSection = Object.keys(this.props.menu)[0]
+    this.setState({currentSection: defaultSection})
   }
 
   handleSectionClick = (name) => {
@@ -26,8 +25,9 @@ class AppPresentational extends Component {
   }
 
   render() {
-    const appHeaderProps = {
-      handleClick: this.handleClick
+    const sideBarProps = {
+      handleSectionClick: this.handleSectionClick,
+      sections: Object.keys(this.props.menu)
     }
     const appStyle = {
       display: 'flex',
@@ -38,16 +38,15 @@ class AppPresentational extends Component {
       flexDirection: 'row',
       marginLeft: '30px'
     }
-    const {sectionIdx, menu} = this.state
     const menuSectionProps = {
-      menuItems: menu[sectionIdx]
+      menuItems: this.props.menu[this.state.currentSection]
     }
+    console.log(this.props);
     return (
       <div style={appStyle}>
-        <AppHeader {...appHeaderProps}/>
-        {'asdfddddddddddddd\nasddddddddddddddddddd'}
+        <AppHeader/>
         <div style={contentStyle}>
-          <SideBar/>
+          <SideBar {...sideBarProps}/>
           <MenuSection {...menuSectionProps}/>
         </div>
       </div>

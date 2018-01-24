@@ -17,14 +17,14 @@ ActiveRecord::Schema.define(version: 20180123214547) do
 
   create_table "items", force: :cascade do |t|
     t.string   "description"
-    t.string   "name",                         null: false
+    t.string   "name",                          null: false
     t.string   "price",         default: ""
     t.integer  "spiciness",     default: 0
-    t.integer  "section_id",                   null: false
+    t.integer  "section_id",                    null: false
     t.integer  "subsection_id"
-    t.boolean  "discont",       default: true
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.boolean  "discount",      default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["name"], name: "index_items_on_name", using: :btree
     t.index ["section_id"], name: "index_items_on_section_id", using: :btree
   end
@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 20180123214547) do
   end
 
   create_table "subsections", force: :cascade do |t|
-    t.string "name",                     null: false
-    t.string "description", default: ""
+    t.string  "name",                     null: false
+    t.string  "description", default: ""
+    t.integer "section_id",               null: false
     t.index ["name"], name: "index_subsections_on_name", using: :btree
+    t.index ["section_id"], name: "index_subsections_on_section_id", using: :btree
   end
 
 end

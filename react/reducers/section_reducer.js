@@ -6,7 +6,7 @@ const SectionReducer = (state = defaultState, action) => {
   Object.freeze(state)
   switch(action.type) {
     case 'GET_SECTIONS':
-      return {state, ...action.sections}
+      return action.sections
     default:
       return state
   }
