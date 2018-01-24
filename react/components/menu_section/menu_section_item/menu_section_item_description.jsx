@@ -2,9 +2,12 @@ import React from 'react'
 
 const ItemDescription = props => {
   const {description} = props
-  return <span>
+  const style = {
+    marginLeft: '10px'
+  }
+  return <div style={style}>
     {description}
-  </span>
+  </div>
 }
 
 export default ItemDescription

@@ -2,7 +2,7 @@ class Api::SectionsController < ApplicationController
   def show
     @sections = {}
     section_list = Section.all.includes(:items)
-    keys = ['description', 'name', 'price', 'spiciness', 'discount']
+    keys = ['id', 'description', 'name', 'price', 'spiciness', 'discount']
     section_list.each do |section|
       item_object = section.items.map do |item|
         item_hash = item.as_json.select {|key, val| keys.include?(key)}
