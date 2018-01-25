@@ -18,7 +18,8 @@ export default class SubListHeader extends Component {
         fontSize: '25px',
         marginBottom: '10px',
         width: '100%',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        textTransform: 'none'
       }
       return (
         <Button style={style} onClick={toggleHidden}>

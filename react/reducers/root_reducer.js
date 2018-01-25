@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import SectionReducer from './section_reducer'
+import OptionReducer from './option_reducer'
 
 const DummyReducer = (state = {}, action) => {
   switch(action.type) {
@@ -9,7 +10,8 @@ const DummyReducer = (state = {}, action) => {
 }
 
 const RootReducer = combineReducers({
-  menu: SectionReducer
+  menu: SectionReducer,
+  option: OptionReducer
 })
 
 export default RootReducer

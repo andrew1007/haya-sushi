@@ -1,7 +1,7 @@
 class Api::SectionsController < ApplicationController
   def show
     @sections = {}
-    section_list = Section.all.includes(:items)
+    section_list = Section.all.includes(:items).includes(:options)
     keys = ['id', 'description', 'name', 'price', 'spiciness', 'discount']
     section_list.each do |section|
       item_object = section.items.map do |item|
@@ -16,8 +16,7 @@ class Api::SectionsController < ApplicationController
     render :show
   end
 
-  private
-  def section_params
+def section_params
     params.require(:id)
   end
 end

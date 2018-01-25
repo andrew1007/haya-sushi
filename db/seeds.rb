@@ -56,9 +56,10 @@ end
 items_hash = {}
 
 items_hash['Beverages'] = [
-  ["Soft Drink", '2.75'],
-  ["Marble Soda", '3.49'],
-  ["Melon Soda", '3.99']
+  ["Soft Drink", "(Coke, Diet Coke, Orange Fanta, Sprite, Mr. Pibb, Iced Tea)",'2.75'],
+  ["Marble Soda", "", '3.49'],
+  ["Melon Soda", "", '3.99'],
+  ["Hot Tea", "", '1.99']
 ]
 
 items_hash['Appetizers'] = [
@@ -350,36 +351,44 @@ roll_hash.each do |subsection, items|
 end
 
 #Lunch Specials
-lunch_options = [
-  "Chicken Teriyaki",
-  "Spicy Honey Chicken",
-  "Spicy Popcorn Chicken"
-]
+options = {}
+options['Lunch Specials'] = '["Chicken Teriyaki", "Spicy Honey Chicken", "Spicy Popcorn Chicken"]'
 
 #Bento Box Combination
-bento_options = [
-  "Chicken Teriyaki", "Beef Teriyaki", "Salmon Teriyaki", "Tonkatsu",
-  "Sesame Chicken", "Saba Shioyaki", "Spicy Popcorn Chicken", "Spicy Honey Chicken",
-  "Tuna Sashimi (4 pcs)", "Salmon Nigiri (2 pcs)", "California Roll (8 pcs)", "Gyoza (4 pcs)",
-  "Croquette (2 pcs)", "Ika Rings", "Mixed Tempura", "Agedashi Tofu"
-]
+options['Bento Box Combination'] = '[["Chicken Teriyaki"], ["Beef Teriyaki"], ["Salmon Teriyaki"], ["Tonkatsu"],["Sesame Chicken"], ["Saba Shioyaki"], ["Spicy Popcorn Chicken"], ["Spicy Honey Chicken"], ["Tuna Sashimi (4 pcs)"], ["Salmon Nigiri (2 pcs)"], ["California Roll (8 pcs)"], ["Gyoza (4 pcs)"], ["Croquette (2 pcs)"], ["Ika Rings"], ["Mixed Tempura"], ["Agedashi Tofu"]]'
 
 #Nigiri
-nigiri_options = [
-  "*Ask for availability"
-]
+options['Nigiri'] = '[["*Ask for availability"]]'
 
 #Rolls
-charge = [
-  ["Deep Fry", "1.50"],
-  ["D.F. Shrimp", "2.00"],
-  ["Cream Cheese", "1.00"],
-  ["Soywrap", "1.00"],
-  ["Lemon", "0.50"],
-  ["Cucumber Wrap", "2.50"],
-  ["Avocado", "1.00"],
-  ["Masago", "1.00"],
-  ["Cucumber", "0.50"],
-  ["Jalapeno", "0.50"],
-  ["Extra Sauce", "0.50"]
-]
+options['Rolls'] = '[["Deep Fry", "1.50"], ["D.F. Shrimp", "2.00"], ["Cream Cheese", "1.00"], ["Soywrap", "1.00"], ["Lemon", "0.50"], ["Cucumber Wrap", "2.50"], ["Avocado", "1.00"], ["Masago", "1.00"], ["Cucumber", "0.50"], ["Jalapeno", "0.50"], ["Extra Sauce", "0.50"]]'
+
+options.each do |section, value|
+  next if Option.find_by({details: value})
+  if Subsection.find_by({name: section})
+    subsection = Subsection.find_by({name: section})
+    Option.create!({details: value, subsection_id: subsection.id, section_id: nil})
+  else
+    section = Section.find_by({name: section})
+    Option.create!({details: value, section_id: section.id})
+  end
+end
+
+Subsection.all.each do |subsection|
+  next if subsection.option_id
+  option = Option.find_by({subsection_id: subsection.id})
+  # debugger
+  if option
+    subsection.option_id = option.id
+    subsection.save!
+  end
+end
+
+Section.all.each do |section|
+  next if section.option_id
+  option = Option.find_by({section_id: section.id})
+  if option
+    section.option_id = option.id
+    section.save!
+  end
+end

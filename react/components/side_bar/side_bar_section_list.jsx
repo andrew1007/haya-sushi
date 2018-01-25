@@ -2,18 +2,25 @@ import React from 'react'
 import ListSubheader from 'material-ui/List/ListSubheader';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
 
 const Section = props => {
   const { classes, sections, handleSectionClick } = props
   const list = sections.map((name, idx) => {
     const style = {
-      color: 'red'
+      justifyContent: 'flex-start',
+      textTransform: 'none',
+      fontSize: '20px',
+      width: '100%'
     }
+    // <ListItem button className={classes.button} onClick={() => handleSectionClick(name)}>
+    //   <ListItemText primary={name}/>
+    // </ListItem>
     return (
       <div key={idx}>
-        <ListItem button className={classes.button} onClick={() => handleSectionClick(name)}>
-          <ListItemText primary={name}/>
-        </ListItem>
+        <Button style={style} onClick={() => handleSectionClick(name)}>
+          {name}
+        </Button>
       </div>
     )
   })
