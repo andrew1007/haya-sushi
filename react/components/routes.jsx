@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Route, hashHistory, Router } from 'react-router'
+import { Route, hashHistory, Router, IndexRedirect } from 'react-router'
 import { Provider } from 'react-redux'
 import App from './app'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
@@ -36,8 +36,7 @@ const Routes = ({store}) => {
     <MuiThemeProvider theme={theme}>
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path='/home' component={App}>
-          <IndexRedirect to="/home"/>
+        <Route path='/' component={App}>
         </Route>
       </Router>
     </Provider>

@@ -11,6 +11,8 @@ export default class SideBar extends Component {
       flexDirection: 'row',
       marginRight: '20px'
     }
+
+    
     const sectionProps = {sections, handleSectionClick}
     return (
       <div style={containerStyle}>

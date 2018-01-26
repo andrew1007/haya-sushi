@@ -1,8 +1,7 @@
 const webpack = require('webpack')
 
 module.exports= {
-  context: __dirname,
-  entry: './react/haya_sushi.jsx',
+  entry: [ 'babel-polyfill', './react/haya_sushi.jsx'],
   output: {
     path: 'app/assets/javascripts',
     filename: 'bundle.js',
@@ -23,12 +22,12 @@ module.exports= {
   resolve: {
     extensions: ['', '.js', '.jsx' ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin()
-  ]
+  // plugins: [
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       'NODE_ENV': JSON.stringify('production')
+  //     }
+  //   }),
+  //   new webpack.optimize.UglifyJsPlugin()
+  // ]
 };
