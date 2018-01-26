@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 
 module.exports= {
+  context: __dirname,
   entry: './react/haya_sushi.jsx',
   output: {
     path: 'app/assets/javascripts',
