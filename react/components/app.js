@@ -5,20 +5,23 @@ import { connect } from 'react-redux'
 import AppHeader from './app_header/app_header'
 import SideBar from './side_bar/side_bar'
 import MenuSectionList from './menu_section/menu_section_list'
+import Home from './home/home'
+
 class AppPresentational extends Component {
 
   constructor() {
     super()
     this.state = {
       currentSection: 0,
+      loaded: false
     }
   }
 
   async componentWillMount() {
     const {getSections, getOptions} = this.props
     await Promise.all([getSections(), getOptions()])
-    const defaultSection = Object.keys(this.props.menu)[0]
-    this.setState({currentSection: defaultSection})
+    const defaultSection = 'Info'
+    this.setState({currentSection: defaultSection, loaded: true})
   }
 
   handleSectionClick = (name) => {
@@ -28,7 +31,7 @@ class AppPresentational extends Component {
   render() {
     const sideBarProps = {
       handleSectionClick: this.handleSectionClick,
-      sections: Object.keys(this.props.menu)
+      sections: ['Info'].concat(Object.keys(this.props.menu))
     }
     const appStyle = {
       display: 'flex',
@@ -37,20 +40,20 @@ class AppPresentational extends Component {
     const contentStyle = {
       display: 'flex',
       flexDirection: 'row',
-      marginLeft: '30px'
+      marginLeft: '30px',
+      opacity: this.state.loaded ? 1 : 0
     }
     const menuSectionProps = {
       menuItems: this.props.menu[this.state.currentSection] || [{}],
       option: this.props.option,
       currentSection: this.state.currentSection
     }
-    console.log(this.props);
     return (
       <div style={appStyle}>
         <AppHeader/>
         <div style={contentStyle}>
           <SideBar {...sideBarProps}/>
-          <MenuSectionList {...menuSectionProps}/>
+          {this.state.currentSection === 'Info' ? <Home/> : <MenuSectionList {...menuSectionProps}/> }
         </div>
       </div>
     )

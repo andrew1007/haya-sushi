@@ -3,9 +3,6 @@ import SectionOptionEntry from './section_option_entry'
 
 const SectionOptionList = props => {
   const {details, title} = props.option
-  if (details && details.length > 0) {
-    debugger
-  }
   console.log(props);
   const midIdx = Math.floor(details.length / 2) + 1
   const left = details.slice(0, midIdx).map(([name, price], idx) => {
@@ -28,7 +25,8 @@ const SectionOptionList = props => {
     width: '50%'
   }
   const headerStyle = {
-    marginBottom: '0px'
+    marginBottom: '0px',
+    marginLeft: '10px'
   }
   const options = [left, right].map((arr, idx) => {
     return <div key={idx} style={style}>{arr}</div>

@@ -9,6 +9,12 @@ export default class MenuSection extends Component {
     this.state = { hidden: true }
   }
 
+  componentWillMount() {
+    if (!this.props.hasSubsection) {
+      this.setState({hidden: false})
+    }
+  }
+
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.section[0].id !== this.props.section[0].id) {
       this.setState({hidden: nextProps.hasSubsection })
