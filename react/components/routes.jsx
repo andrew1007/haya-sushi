@@ -37,6 +37,7 @@ const Routes = ({store}) => {
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path='/' component={App}>
+          <IndexRedirect to="/"/>
         </Route>
       </Router>
     </Provider>
