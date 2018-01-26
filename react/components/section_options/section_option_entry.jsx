@@ -3,9 +3,11 @@ import React from 'react'
 const SectionOptionEntry = props => {
   const {name, price} = props
   const style = {
-    width: '50%',
+    width: '70%',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    fontSize: '17px',
+    marginBottom: '4px'
   }
   return (
     <div style={style}>

@@ -13,6 +13,9 @@ const AppHeader = props => {
   const style = {
     borderBottom: '2px solid #EF5350'
   }
+  const logoStyle = {
+    fontSize: '40px'
+  }
   return (
     <div style={style}>
       <AppBar position="static">
@@ -21,7 +24,7 @@ const AppHeader = props => {
             <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
-            <h2>Haya Sushi</h2>
+            <div style={logoStyle}>Haya Sushi</div>
           </Typography>
         </Toolbar>
       </AppBar>

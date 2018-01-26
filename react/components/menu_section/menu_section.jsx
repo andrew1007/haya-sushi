@@ -25,17 +25,17 @@ export default class MenuSection extends Component {
     const headerProps = {subSection, hasHeader, toggleHidden: this.toggleHidden}
     const optionProps = {option}
     const listStyle = this.state.hidden ? {height: '0px', overflow: 'hidden'} : {}
-    const menuItems = section.map(item => {
+    const menuItems = section.map((item, idx) => {
       let {id, description, name, price, spiciness} = item
       let menuItemProps = {id, description, name, price, spiciness}
-      return <MenuItem {...menuItemProps} />
+      return <MenuItem key={idx} {...menuItemProps} />
     })
     return (
-      <div key={this.props.id}>
+      <div>
         {this.props.hasHeader ? <MenuSectionHeader {...headerProps}/> : null}
         <div style={listStyle}>
           {menuItems}
-          {option.length > 0 ? <SectionOptionList {...optionProps}/> : null}
+          <SectionOptionList {...optionProps}/>
         </div>
       </div>
     )

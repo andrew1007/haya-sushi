@@ -14,7 +14,8 @@ const MenuItem = props => {
   const containerStyle = {
     display: 'flex',
     marginBottom: '10px',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginLeft: '20px'
   }
   return (
     <div style={containerStyle} key={props.id}>

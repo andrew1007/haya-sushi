@@ -31,7 +31,9 @@ ActiveRecord::Schema.define(version: 20180125233423) do
   end
 
   create_table "options", force: :cascade do |t|
-    t.string  "name",          null: false
+    t.string  "title"
+    t.string  "name"
+    t.string  "details"
     t.string  "price"
     t.integer "subsection_id"
     t.integer "section_id"
