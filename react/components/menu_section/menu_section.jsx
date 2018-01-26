@@ -1,41 +1,57 @@
-import React from 'react'
-import MenuSectionItem from './menu_section_item/menu_section_item'
-import MenuSectionItemSublist from './menu_section_item_sublist'
-import SubListHeader from './menu_section_sublist_header'
-import MenuSubsection from './menu_subsection'
+import React, {Component} from 'react'
+import MenuItem from '../menu_item/menu_item'
+import MenuSectionHeader from './menu_section_header'
+import SectionOptionList from '../section_options/section_option_list'
 
-const MenuSection = props => {
-  let listRender = []
-  const items = props.menuItems || [{}]
-  if (items.length > 0 && items[0].subsection) {
-    const itemSubsections = items.map(({subsection}) => subsection)
-    const subsections = [...new Set(itemSubsections)]
-    for (let section of subsections) {
-      listRender.push(items.filter(({subsection}) => subsection === section))
+export default class MenuSection extends Component {
+  constructor() {
+    super()
+    this.state = {
+      hidden: true
     }
-  } else {
-    listRender.push(items)
   }
-  const menuItems = listRender.map((section, id) => {
-    let subSection
-    if (section[0] && section[0].subsection) {
-      subSection = section[0].subsection
+
+  componentDidMount() {
+    if (this.props.subSection === '') {
+      this.setState({hidden: false})
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.section[0].id !== this.props.section[0].id) {
+      this.setState({hidden: nextProps.subSection === '' ? false : true})
+    }
+  }
+
+  toggleHidden = () => {
+    this.setState({hidden: !this.state.hidden})
+  }
+
+  render() {
+    const {section, subSection, option, hasHeader} = this.props
+    const itemSublistProps = {section, subSection}
+    const headerProps = {subSection, toggleHidden: this.toggleHidden}
+    const optionProps = {option}
+    let listStyle
+    if (this.state.hidden) {
+      listStyle = {
+        height: '0px',
+        overflow: 'hidden'
+      }
     } else {
-      subSection = ''
+      listStyle = {}
     }
-    let subsectionProps = {section, subSection, id}
-    return <MenuSubsection key={id} {...subsectionProps}/>
-  })
-  const style = {
-    width: '100%',
-    marginTop: '10px',
-    maxWidth: '550px'
+    const menuItems = section.map(item => {
+      let {id, description, name, price, spiciness} = item
+      let menuItemProps = {id, description, name, price, spiciness}
+      return <MenuItem {...menuItemProps} />
+    })
+    return (
+      <div key={this.props.id}>
+        {this.props.hasHeader ? <MenuSectionHeader {...headerProps}/> : null}
+        {menuItems}
+        {option.length > 0 ? <SectionOptionList {...optionProps}/> : null}
+      </div>
+    )
   }
-  return (
-    <div style={style}>
-      {menuItems}
-    </div>
-  )
 }
-
-export default MenuSection

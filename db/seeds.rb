@@ -352,32 +352,35 @@ end
 
 #Lunch Specials
 options = {}
-options['Lunch Specials'] = '["Chicken Teriyaki", "Spicy Honey Chicken", "Spicy Popcorn Chicken"]'
+options['Lunch Specials'] = [["Chicken Teriyaki"], ["Spicy Honey Chicken"], ["Spicy Popcorn Chicken"]]
 
 #Bento Box Combination
-options['Bento Box Combination'] = '[["Chicken Teriyaki"], ["Beef Teriyaki"], ["Salmon Teriyaki"], ["Tonkatsu"],["Sesame Chicken"], ["Saba Shioyaki"], ["Spicy Popcorn Chicken"], ["Spicy Honey Chicken"], ["Tuna Sashimi (4 pcs)"], ["Salmon Nigiri (2 pcs)"], ["California Roll (8 pcs)"], ["Gyoza (4 pcs)"], ["Croquette (2 pcs)"], ["Ika Rings"], ["Mixed Tempura"], ["Agedashi Tofu"]]'
+options['Bento Box Combination'] = [["Chicken Teriyaki"], ["Beef Teriyaki"], ["Salmon Teriyaki"], ["Tonkatsu"],["Sesame Chicken"], ["Saba Shioyaki"], ["Spicy Popcorn Chicken"], ["Spicy Honey Chicken"], ["Tuna Sashimi (4 pcs)"], ["Salmon Nigiri (2 pcs)"], ["California Roll (8 pcs)"], ["Gyoza (4 pcs)"], ["Croquette (2 pcs)"], ["Ika Rings"], ["Mixed Tempura"], ["Agedashi Tofu"]]
 
 #Nigiri
-options['Nigiri'] = '[["*Ask for availability"]]'
+options['Nigiri'] = [["*Ask for availability"]]
 
 #Rolls
-options['Rolls'] = '[["Deep Fry", "1.50"], ["D.F. Shrimp", "2.00"], ["Cream Cheese", "1.00"], ["Soywrap", "1.00"], ["Lemon", "0.50"], ["Cucumber Wrap", "2.50"], ["Avocado", "1.00"], ["Masago", "1.00"], ["Cucumber", "0.50"], ["Jalapeno", "0.50"], ["Extra Sauce", "0.50"]]'
+options['Rolls'] = [["Deep Fry", "1.50"], ["D.F. Shrimp", "2.00"], ["Cream Cheese", "1.00"], ["Soywrap", "1.00"], ["Lemon", "0.50"], ["Cucumber Wrap", "2.50"], ["Avocado", "1.00"],
+["Masago", "1.00"], ["Cucumber", "0.50"], ["Jalapeno", "0.50"], ["Extra Sauce", "0.50"]]
 
-options.each do |section, value|
-  next if Option.find_by({details: value})
-  if Subsection.find_by({name: section})
-    subsection = Subsection.find_by({name: section})
-    Option.create!({details: value, subsection_id: subsection.id, section_id: nil})
-  else
-    section = Section.find_by({name: section})
-    Option.create!({details: value, section_id: section.id})
+options.each do |key, value|
+  value.each do |entry|
+    name, price = entry
+    if Subsection.find_by({name: key})
+      subsection = Subsection.find_by({name: key})
+      Option.create!({name: name, price: price, subsection_id: subsection.id})
+    else
+      section = Section.find_by({name: key})
+      debugger if !section
+      Option.create!({name: name, price: price, section_id: section.id})
+    end
   end
 end
 
 Subsection.all.each do |subsection|
   next if subsection.option_id
   option = Option.find_by({subsection_id: subsection.id})
-  # debugger
   if option
     subsection.option_id = option.id
     subsection.save!

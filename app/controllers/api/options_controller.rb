@@ -1,18 +1,23 @@
 class Api::OptionsController < ApplicationController
   def show
-    @options = {}
-    @options['section'] = get_options('section_id')
-    @options['subsection'] = get_options('subsection_id')
+    @options = get_options
     render :show
   end
 
   private
-  def get_options(col_name)
+  def get_options
     hash = {}
-    Option.where.not({col_name => nil})
-          .as_json.each do |key, val|
-            hash[key[col_name]] = key['details']
-          end
+    sections, subsections = Option.all.partition {|option| option.section_id }
+    section_ids = sections.map {|option| option.section_id}.uniq
+    section_ids.each do |id|
+      section = Section.find(id)
+      hash[section.name] = Option.where({section_id: id}).map {|option| [option.name, option.price]}
+    end
+    subsection_ids = subsections.map {|option| option.subsection_id}.uniq
+    subsection_ids.each do |id|
+      subsection = Subsection.find(id)
+      hash[subsection.name] = Option.where({subsection_id: id}). map {|option| [option.name, option.price]}
+    end
     hash
   end
 end

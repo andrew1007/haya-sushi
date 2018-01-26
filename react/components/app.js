@@ -4,7 +4,7 @@ import { getOptions } from '../actions/option_actions'
 import { connect } from 'react-redux'
 import AppHeader from './app_header/app_header'
 import SideBar from './side_bar/side_bar'
-import MenuSection from './menu_section/menu_section'
+import MenuSectionList from './menu_section/menu_section_list'
 class AppPresentational extends Component {
 
   constructor() {
@@ -40,8 +40,9 @@ class AppPresentational extends Component {
       marginLeft: '30px'
     }
     const menuSectionProps = {
-      menuItems: this.props.menu[this.state.currentSection]
-      options: this.props.option
+      menuItems: this.props.menu[this.state.currentSection] || [{}],
+      option: this.props.option,
+      currentSection: this.state.currentSection
     }
     console.log(this.props);
     return (
@@ -49,7 +50,7 @@ class AppPresentational extends Component {
         <AppHeader/>
         <div style={contentStyle}>
           <SideBar {...sideBarProps}/>
-          <MenuSection {...menuSectionProps}/>
+          <MenuSectionList {...menuSectionProps}/>
         </div>
       </div>
     )

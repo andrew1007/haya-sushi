@@ -6,6 +6,7 @@ class InitTables < ActiveRecord::Migration[5.0]
       t.string :price, default: ''
       t.integer :spiciness, default: 0
       t.integer :section_id, null: false
+      t.integer :option_id
       t.integer :subsection_id
       t.boolean :discount, default: false
       t.timestamps
@@ -13,8 +14,9 @@ class InitTables < ActiveRecord::Migration[5.0]
 
     create_table :sections do |t|
       t.string :name, null: false
+      t.string :description
     end
-
+    add_index :sections, :name
     add_index :items, :name
     add_index :items, :section_id
   end

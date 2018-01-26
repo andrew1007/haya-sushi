@@ -9,8 +9,8 @@ const OptionReducer = (state = defaultState, action) => {
   Object.freeze(state)
   switch(action.type) {
     case 'GET_OPTIONS':
-      const { section, subsection } = action.option
-      return {section, subsection}
+      const option = action.option
+      return {...option}
     default:
       return state
   }

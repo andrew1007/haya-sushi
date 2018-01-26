@@ -1,4 +1,4 @@
 class Subsection < ApplicationRecord
   has_many :items
-  has_one :option
+  has_many :options
 end

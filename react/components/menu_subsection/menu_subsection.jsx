@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MenuSectionItemSublist from './menu_section_item_sublist'
 import SubListHeader from './menu_section_sublist_header'
+import SectionOption from './menu_section_menu_option'
 
 export default class MenuSubsection extends Component {
   constructor() {
@@ -27,9 +28,10 @@ export default class MenuSubsection extends Component {
   }
 
   render() {
-    const {section, subSection} = this.props
+    const {section, subSection, option} = this.props
     const itemSublistProps = {section, subSection}
     const headerProps = {subSection, toggleHidden: this.toggleHidden}
+    const optionProps = {option}
     let listStyle
     if (this.state.hidden) {
       listStyle = {
@@ -44,6 +46,7 @@ export default class MenuSubsection extends Component {
         <SubListHeader {...headerProps}/>
         <div style={listStyle}>
           <MenuSectionItemSublist {...itemSublistProps}/>
+          {option ? <SectionOption {...optionProps}/> : null}
         </div>
       </div>
     )

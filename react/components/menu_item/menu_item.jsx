@@ -1,9 +1,9 @@
 import React from 'react'
-import ItemName from './menu_section_item_name'
-import ItemDescription from './menu_section_item_description'
-import ItemPrice from './menu_section_item_price'
+import ItemName from './menu_item_name'
+import ItemDescription from './menu_item_description'
+import ItemPrice from './menu_item_price'
 
-const MenuSectionItem = props => {
+const MenuItem = props => {
   const {id, description, name, price, spiciness} = props
   const itemNameProps = {name}
   const itemDescriptionProps = {description}
@@ -26,4 +26,4 @@ const MenuSectionItem = props => {
     </div>
   )
 }
-export default MenuSectionItem
+export default MenuItem
