@@ -10,9 +10,9 @@ export default class MenuSectionHeader extends Component {
   }
 
   render() {
-    const {subSection, toggleHidden} = this.props
+    const {hasHeader, subSection, toggleHidden} = this.props
     let style
-    if (subSection !== '') {
+    if (hasHeader) {
       style = {
         borderBottom: '1px solid #EF5350',
         fontSize: '25px',

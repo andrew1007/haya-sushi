@@ -1,17 +1,18 @@
 import React from 'react'
 
-const SectionOption = props => {
-  const entries = props.option.map(([name, price], idx) => {
-    return <div key={idx}>
-      {name}
-      {price}
-    </div>
-  })
+const SectionOptionEntry = props => {
+  const {name, price} = props
+  const style = {
+    width: '50%',
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
   return (
-    <div>
-      {entries}
+    <div style={style}>
+      <div>{name}</div>
+      <div>{price}</div>
     </div>
   )
 }
 
-export default SectionOption
+export default SectionOptionEntry

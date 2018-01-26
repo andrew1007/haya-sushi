@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuSection from './menu_section'
+import SectionOptionList from '../section_options/section_option_list'
 // import MenuSectionItem from './menu_section_item/menu_section_item'
 // import MenuSectionItemSublist from './menu_section_item_sublist'
 // import SubListHeader from './menu_section_sublist_header'
@@ -9,6 +10,7 @@ require('../helpers/helpers')
 
 const MenuSectionList = props => {
   const partitioned = props.menuItems.partitionObjectsByKey('subsection')
+  const sectionOption = props.option[props.currentSection] || []
   console.log(partitioned);
   let hasHeader = partitioned.length > 1
   const menuItems = partitioned.map((section, id) => {
@@ -29,9 +31,9 @@ const MenuSectionList = props => {
   return (
     <div style={style}>
       {menuItems}
+      {sectionOption.length > 0 ? <SectionOptionList option={sectionOption}/> : null}
     </div>
   )
-  // {option ? <SectionOption option={option}/> : null}
 }
 
 export default MenuSectionList
