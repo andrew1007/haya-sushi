@@ -36,8 +36,8 @@ const Routes = ({store}) => {
     <MuiThemeProvider theme={theme}>
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path='/' component={App}>
-          <IndexRedirect to="/"/>
+        <Route path='/home' component={App}>
+          <IndexRedirect to="/home"/>
         </Route>
       </Router>
     </Provider>
