@@ -11,11 +11,12 @@ require('../helpers/helpers')
 const MenuSectionList = props => {
   const partitioned = props.menuItems.partitionObjectsByKey('subsection')
   const sectionOption = props.option[props.currentSection] || {details: [], title: null}
-  let hasHeader = partitioned.length > 1
+  const hasSubsection = partitioned.length > 1
+  const currentSection = props.currentSection
   const menuItems = partitioned.map((section, id) => {
     let subSection = section[0].subsection
     let option = props.option[subSection] || {details: [], title: null}
-    let subsectionProps = {section, subSection, id, hasHeader, option}
+    let subsectionProps = {section, subSection, id, hasSubsection, option, currentSection}
     return <div key={id}>
       <MenuSection {...subsectionProps}/>
     </div>

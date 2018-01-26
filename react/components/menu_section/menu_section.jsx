@@ -11,7 +11,7 @@ export default class MenuSection extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.section[0].id !== this.props.section[0].id) {
-      this.setState({hidden: nextProps.hasHeader })
+      this.setState({hidden: nextProps.hasSubsection })
     }
   }
 
@@ -20,9 +20,11 @@ export default class MenuSection extends Component {
   }
 
   render() {
-    const {section, subSection, option, hasHeader} = this.props
+    const {section, currentSection, subSection, option, hasSubsection} = this.props
     const itemSublistProps = {section, subSection}
-    const headerProps = {subSection, hasHeader, toggleHidden: this.toggleHidden}
+    const toggleHidden = hasSubsection ? this.toggleHidden : null
+    const header = hasSubsection ? subSection : currentSection
+    const headerProps = {header, toggleHidden, hasSubsection }
     const optionProps = {option}
     const listStyle = this.state.hidden ? {height: '0px', overflow: 'hidden'} : {}
     const menuItems = section.map((item, idx) => {
@@ -30,9 +32,10 @@ export default class MenuSection extends Component {
       let menuItemProps = {id, description, name, price, spiciness}
       return <MenuItem key={idx} {...menuItemProps} />
     })
+    console.log(section);
     return (
       <div>
-        {this.props.hasHeader ? <MenuSectionHeader {...headerProps}/> : null}
+        <MenuSectionHeader {...headerProps}/>
         <div style={listStyle}>
           {menuItems}
           <SectionOptionList {...optionProps}/>
