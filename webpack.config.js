@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 
 module.exports= {
-  entry: [ 'babel-polyfill', './react/haya_sushi.jsx'],
+  entry: './react/haya_sushi.jsx',
   output: {
     path: 'app/assets/javascripts',
     filename: 'bundle.js',
