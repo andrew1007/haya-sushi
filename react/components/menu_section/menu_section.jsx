@@ -38,7 +38,6 @@ export default class MenuSection extends Component {
       let menuItemProps = {id, description, name, price, spiciness}
       return <MenuItem key={idx} {...menuItemProps} />
     })
-    console.log(section);
     return (
       <div>
         <MenuSectionHeader {...headerProps}/>

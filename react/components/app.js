@@ -13,7 +13,8 @@ class AppPresentational extends Component {
     super()
     this.state = {
       currentSection: 0,
-      loaded: false
+      loaded: false,
+      showSidebar: false
     }
   }
 
@@ -28,10 +29,24 @@ class AppPresentational extends Component {
     this.setState({currentSection: name})
   }
 
+  toggleSidebar = _ => {
+    console.log('hit');
+    this.setState({showSidebar: !this.state.showSidebar})
+  }
+
   render() {
     const sideBarProps = {
       handleSectionClick: this.handleSectionClick,
-      sections: ['Info'].concat(Object.keys(this.props.menu))
+      sections: ['Info'].concat(Object.keys(this.props.menu)),
+      showSidebar: this.state.showSidebar
+    }
+    const menuSectionProps = {
+      menuItems: this.props.menu[this.state.currentSection] || [{}],
+      option: this.props.option,
+      currentSection: this.state.currentSection,
+    }
+    const appHeaderProps = {
+      toggleSidebar: this.toggleSidebar
     }
     const appStyle = {
       display: 'flex',
@@ -39,19 +54,13 @@ class AppPresentational extends Component {
     }
     const contentStyle = {
       display: 'flex',
-      flexDirection: 'row',
       marginLeft: '30px',
       opacity: this.state.loaded ? 1 : 0
     }
-    const menuSectionProps = {
-      menuItems: this.props.menu[this.state.currentSection] || [{}],
-      option: this.props.option,
-      currentSection: this.state.currentSection
-    }
     return (
       <div style={appStyle}>
-        <AppHeader/>
-        <div style={contentStyle}>
+        <AppHeader {...appHeaderProps}/>
+        <div className='app-content-container' style={contentStyle}>
           <SideBar {...sideBarProps}/>
           {this.state.currentSection === 'Info' ? <Home/> : <MenuSectionList {...menuSectionProps}/> }
         </div>

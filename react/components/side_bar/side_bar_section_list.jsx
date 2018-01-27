@@ -4,28 +4,27 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 
-const Section = props => {
+const SideBarSectionList = props => {
   const { classes, sections, handleSectionClick } = props
   const list = sections.map((name, idx) => {
     const style = {
       justifyContent: 'flex-start',
       textTransform: 'none',
       fontSize: '20px',
-      width: '100%'
+      width: '100%',
+      flexDirection:'row',
     }
     // <ListItem button className={classes.button} onClick={() => handleSectionClick(name)}>
     //   <ListItemText primary={name}/>
     // </ListItem>
     return (
-      <div key={idx}>
-        <Button style={style} onClick={() => handleSectionClick(name)}>
-          {name}
-        </Button>
-      </div>
+      <Button className='side-bar-button' key={idx} onClick={() => handleSectionClick(name)}>
+        {name}
+      </Button>
     )
   })
   return (
-    <List color='primary'>
+    <List className='side-bar-list' color='primary'>
       {list}
     </List>
   )
@@ -42,4 +41,4 @@ const styles = theme => ({
     color: theme.palette.primary.contrastText
   }
 });
-export default withStyles(styles)(Section)
+export default withStyles(styles)(SideBarSectionList)

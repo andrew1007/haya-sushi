@@ -1,0 +1,38 @@
+.side-bar-button {
+  justify-content: flex-start;
+  text-transform: none;
+  font-size: 20px;
+  width: 100%;
+  flex-direction:row;
+}
+
+.side-bar-list {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .side-bar-hidden {
+    transition: transform 500ms ease-in-out;
+    animation-timing-function: cubic-bezier(0.01, 0.98, 0.01, 1);
+    transform: translate3d(-280px, 0px, 0px);
+  }
+
+  .side-bar-show {
+    animation-timing-function: cubic-bezier(0.1, 0.8, 0.1, 1);
+    transition: transform 500ms ease-in-out;
+    transform: translate3d(0px, 0px, 0px);
+  }
+  .side-bar-list {
+    display: flex;
+  }
+
+  .side-bar-container {
+    position: fixed;
+  }
+  .side-bar-button {
+    font-size: 1.5em !important;
+  }
+}

@@ -1,0 +1,18 @@
+.app-header-logo{
+  font-size: 40px;
+}
+
+.app-header-menu-icon {
+  height: 30px !important;
+  overflow: hidden !important;
+}
+
+@media screen and (max-width: 1000px) {
+  .app-header-logo{
+    font-size: 4em;
+  }
+  .app-header-container {
+    margin-top: 20px;
+    height: 90px;
+  }
+}
