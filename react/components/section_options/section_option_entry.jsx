@@ -10,7 +10,7 @@ const SectionOptionEntry = props => {
     marginBottom: '4px'
   }
   return (
-    <div style={style}>
+    <div className='section-options-entry' style={style}>
       <div>{name}</div>
       <div>{price}</div>
     </div>

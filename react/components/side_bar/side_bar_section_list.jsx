@@ -7,16 +7,6 @@ import Button from 'material-ui/Button';
 const SideBarSectionList = props => {
   const { classes, sections, handleSectionClick } = props
   const list = sections.map((name, idx) => {
-    const style = {
-      justifyContent: 'flex-start',
-      textTransform: 'none',
-      fontSize: '20px',
-      width: '100%',
-      flexDirection:'row',
-    }
-    // <ListItem button className={classes.button} onClick={() => handleSectionClick(name)}>
-    //   <ListItemText primary={name}/>
-    // </ListItem>
     return (
       <Button className='side-bar-button' key={idx} onClick={() => handleSectionClick(name)}>
         {name}

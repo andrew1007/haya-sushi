@@ -3,16 +3,23 @@
 }
 
 .app-header-menu-icon {
-  height: 30px !important;
-  overflow: hidden !important;
+  height: 0px;
+  width: 0px;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 1000px) {
   .app-header-logo{
     font-size: 4em;
   }
+  .app-header-menu-icon {
+    height: auto;
+    width: auto;
+    overflow: auto;
+  }
   .app-header-container {
-    margin-top: 20px;
+    margin-top: -10px;
     height: 90px;
+    padding-top: 25px;
   }
 }

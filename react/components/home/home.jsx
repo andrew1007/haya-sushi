@@ -12,7 +12,7 @@ const Home = props => {
   const textStyle = {
     margin: '10px'
   }
-  const infoRender = info.map((text, idx) => <h3 style={textStyle}>{text}</h3>)
+  const infoRender = info.map((text, idx) => <div style={textStyle}>{text}</div>)
   const infoStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -24,13 +24,12 @@ const Home = props => {
     alignItems: 'center',
     flexDirection: 'column',
     flexGrow: 1,
-    maxWidth: '550px',
     marginTop: '30px'
   }
   return (
-    <div style={containerStyle}>
-      <img src={logo}/>
-      <div style={infoStyle}>
+    <div className='menu-section-list-container' style={containerStyle}>
+      <img className='menu-section-logo' src={logo}/>
+      <div className='menu-section-info' style={infoStyle}>
         {infoRender}
       </div>
     </div>

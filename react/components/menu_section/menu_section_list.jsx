@@ -23,12 +23,10 @@ const MenuSectionList = props => {
   })
 
   const style = {
-    width: '100%',
     marginTop: '10px',
-    maxWidth: '550px'
   }
   return (
-    <div style={style}>
+    <div className='menu-section-list-container' style={style}>
       {menuItems}
       {sectionOption.details.length > 0 || sectionOption.title ? <SectionOptionList option={sectionOption}/> : null}
     </div>

@@ -22,7 +22,8 @@ export default class SideBar extends Component {
       flexDirection: 'row',
       paddingRight: '20px',
       borderRight: '2px solid #EF5350',
-      backgroundColor: '#212121'
+      backgroundColor: '#212121',
+      position: 'fixed'
     }
 
 

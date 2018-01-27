@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import AppHeader from './app_header/app_header'
 import SideBar from './side_bar/side_bar'
 import MenuSectionList from './menu_section/menu_section_list'
+import Button from 'material-ui/Button';
 import Home from './home/home'
 
 class AppPresentational extends Component {
@@ -27,10 +28,12 @@ class AppPresentational extends Component {
 
   handleSectionClick = (name) => {
     this.setState({currentSection: name})
+    if (window.innerWidth < 1000) {
+      this.toggleSidebar()
+    }
   }
 
   toggleSidebar = _ => {
-    console.log('hit');
     this.setState({showSidebar: !this.state.showSidebar})
   }
 
@@ -44,6 +47,8 @@ class AppPresentational extends Component {
       menuItems: this.props.menu[this.state.currentSection] || [{}],
       option: this.props.option,
       currentSection: this.state.currentSection,
+      showSidebar: this.state.showSidebar,
+      toggleSidebar: this.toggleSidebar
     }
     const appHeaderProps = {
       toggleSidebar: this.toggleSidebar
@@ -57,11 +62,25 @@ class AppPresentational extends Component {
       marginLeft: '30px',
       opacity: this.state.loaded ? 1 : 0
     }
+    const transparentLayerStyle = {
+      zIndex: this.state.showSidebar ? 10 : -10,
+      position: 'fixed',
+      backgroundColor:'transparent',
+      width: '100%',
+      height: '100%'
+    }
+    const headerStyle = {
+      display: 'flex',
+    }
     return (
       <div style={appStyle}>
+        <div style={transparentLayerStyle} onClick={this.toggleSidebar}/>
         <AppHeader {...appHeaderProps}/>
+        <div className='app-header-filler'></div>
         <div className='app-content-container' style={contentStyle}>
+          <div className='app-sidebar-filler'/>
           <SideBar {...sideBarProps}/>
+            <div style={transparentLayerStyle} onClick={this.toggleSidebar}></div>
           {this.state.currentSection === 'Info' ? <Home/> : <MenuSectionList {...menuSectionProps}/> }
         </div>
       </div>

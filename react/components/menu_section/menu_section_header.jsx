@@ -23,13 +23,13 @@ export default class MenuSectionHeader extends Component {
     }
     if (hasSubsection) {
       return (
-        <Button style={style} onClick={toggleHidden}>
+        <Button className='menu-section-header' style={style} onClick={toggleHidden}>
           {header}
         </Button>
       )
     } else {
       return (
-        <ListItem style={style} onClick={toggleHidden}>
+        <ListItem className='menu-section-header' style={style} onClick={toggleHidden}>
           {header}
         </ListItem>
       )

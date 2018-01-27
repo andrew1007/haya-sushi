@@ -1,6 +1,6 @@
 .side-bar-button {
   justify-content: flex-start;
-  text-transform: none;
+  text-transform: none !important;
   font-size: 20px;
   width: 100%;
   flex-direction:row;
@@ -11,28 +11,42 @@
   flex-direction: column;
   position: fixed;
 }
+.side-bar-hidden{
+  height: 97vh;
+  z-index: 1
+}
 
+.side-bar-show {
+  height: 97vh;
+  z-index: 1
+}
 
 @media screen and (max-width: 1000px) {
   .side-bar-hidden {
     transition: transform 500ms ease-in-out;
     animation-timing-function: cubic-bezier(0.01, 0.98, 0.01, 1);
-    transform: translate3d(-280px, 0px, 0px);
+    transform: translate3d(-62vw, 0px, 0px);
+    padding-right: 0px !important;
+    z-index: 100
   }
 
   .side-bar-show {
     animation-timing-function: cubic-bezier(0.1, 0.8, 0.1, 1);
     transition: transform 500ms ease-in-out;
     transform: translate3d(0px, 0px, 0px);
+    padding-right: 0px !important;
+    z-index: 100
   }
   .side-bar-list {
     display: flex;
+    width: 60vw;
   }
 
   .side-bar-container {
     position: fixed;
   }
   .side-bar-button {
-    font-size: 1.5em !important;
+    margin-bottom: 0px;
+    font-size: 3.5em !important;
   }
 }

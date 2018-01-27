@@ -5,7 +5,7 @@ const ItemDescription = props => {
   const style = {
     marginLeft: '10px'
   }
-  return <div style={style}>
+  return <div className='menu-item-description' style={style}>
     {description}
   </div>
 }

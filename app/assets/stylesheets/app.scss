@@ -1,5 +1,20 @@
+.app-header-filler {
+  height: 68px;
+}
+
+.app-sidebar-filler {
+  width: 160px;
+}
+
 @media screen and (max-width: 1000px) {
   .app-content-container {
     margin-left: 0px !important;
+  }
+
+  .app-header-filler {
+    height: 108px;
+  }
+  .app-sidebar-filler {
+    width: 0px;
   }
 }

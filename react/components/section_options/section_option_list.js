@@ -32,7 +32,7 @@ const SectionOptionList = props => {
   })
   return (
     <div>
-      <h3 style={headerStyle}>{title}</h3>
+      <h3 className='section-options-header' style={headerStyle}>{title}</h3>
       <div style={containerStyle}>
         {options}
       </div>

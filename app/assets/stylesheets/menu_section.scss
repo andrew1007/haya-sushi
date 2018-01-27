@@ -1,0 +1,27 @@
+.menu-section-list-container {
+  min-width: 550px;
+  max-width: 550px;
+}
+
+@media screen and (max-width: 1000px) {
+  .menu-section-list-container {
+    max-width: none;
+    width: 94vw;
+    margin-left: 3vw;
+    margin-right: 3vw;
+  }
+
+  .menu-section-info {
+    font-size: 3em;
+  }
+
+  .menu-section-logo {
+    height: 500px;
+    margin-bottom: 30px;
+  }
+
+  .menu-section-header {
+    font-size: 3.5em !important;
+    border-bottom: 5px solid #EF5350 !important;
+  }
+}
