@@ -24,7 +24,8 @@ const Home = props => {
     alignItems: 'center',
     flexDirection: 'column',
     flexGrow: 1,
-    marginTop: '30px'
+    marginTop: '30px',
+    height: '80vh'
   }
   return (
     <div className='menu-section-list-container' style={containerStyle}>
