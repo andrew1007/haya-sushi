@@ -3,6 +3,10 @@
   max-width: 550px;
 }
 
+.menu-section-logo {
+  margin-top: -200px;
+}
+
 @media screen and (max-width: 1000px) {
   .menu-section-list-container {
     max-width: none;
@@ -16,8 +20,10 @@
   }
 
   .menu-section-logo {
-    height: 500px;
+    min-height: 500px;
+    min-width: 500px;
     margin-bottom: 30px;
+    margin-top: 0px;
   }
 
   .menu-section-header {
