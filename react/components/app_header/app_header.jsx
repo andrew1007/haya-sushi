@@ -16,6 +16,7 @@ const AppHeader = props => {
     width: '100vw',
     backgroundColor: '#212121',
     zIndex: 3,
+    top: 0
   }
   const logoStyle = {
     fontSize: '40px'

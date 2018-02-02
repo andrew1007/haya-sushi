@@ -34,7 +34,9 @@ class AppPresentational extends Component {
   }
 
   toggleSidebar = _ => {
-    this.setState({showSidebar: !this.state.showSidebar})
+    this.setState({showSidebar: !this.state.showSidebar}, () => {
+      document.body.style.overflow = this.state.showSidebar ? 'hidden' : 'auto'
+    })
   }
 
   render() {
@@ -66,8 +68,8 @@ class AppPresentational extends Component {
       zIndex: this.state.showSidebar ? 10 : -10,
       position: 'fixed',
       backgroundColor:'transparent',
-      width: '100%',
-      height: '100%'
+      width: '100vw',
+      height: '100vh'
     }
     const headerStyle = {
       display: 'flex',

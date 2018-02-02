@@ -1,0 +1,223 @@
+/* line 1, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app.scss */
+.app-header-filler {
+  height: 68px;
+}
+
+/* line 5, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app.scss */
+.app-sidebar-filler {
+  width: 160px;
+}
+
+@media screen and (max-width: 1000px) {
+  /* line 10, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app.scss */
+  .app-content-container {
+    margin-left: 0px !important;
+  }
+
+  /* line 14, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app.scss */
+  .app-header-filler {
+    height: 119px;
+  }
+
+  /* line 18, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app.scss */
+  .app-sidebar-filler {
+    width: 0px;
+  }
+}
+/* line 1, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app_header.scss */
+.app-header-logo {
+  font-size: 40px;
+}
+
+/* line 5, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app_header.scss */
+.app-header-menu-icon {
+  height: 0px;
+  width: 0px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  /* line 12, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app_header.scss */
+  .app-header-logo {
+    font-size: 4em;
+  }
+
+  /* line 15, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app_header.scss */
+  .app-header-menu-icon {
+    height: auto;
+    width: auto;
+    overflow: auto;
+    margin-right: 20px;
+  }
+
+  /* line 21, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app_header.scss */
+  .app-header-menu-icon:hover {
+    cursor: pointer;
+  }
+
+  /* line 24, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/app_header.scss */
+  .app-header-container {
+    margin-top: 0px;
+    padding-left: 20px;
+    height: 90px;
+    padding-top: 25px;
+    padding-bottom: 10px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  /* line 2, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_item.scss */
+  .menu-item-description {
+    font-size: 2.5em;
+  }
+
+  /* line 5, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_item.scss */
+  .menu-item-name {
+    font-size: 3em;
+  }
+
+  /* line 8, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_item.scss */
+  .menu-item-price {
+    font-size: 3.3em;
+  }
+
+  /* line 11, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_item.scss */
+  .menu-item-market-price {
+    font-size: 2.4em;
+  }
+}
+/* line 1, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_section.scss */
+.menu-section-list-container {
+  min-width: 550px;
+  max-width: 550px;
+}
+
+/* line 6, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_section.scss */
+.menu-section-logo {
+  margin-top: -200px;
+}
+
+@media screen and (max-width: 1000px) {
+  /* line 11, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_section.scss */
+  .menu-section-list-container {
+    max-width: none;
+    width: 94vw;
+    margin-left: 3vw;
+    margin-right: 3vw;
+  }
+
+  /* line 18, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_section.scss */
+  .menu-section-info {
+    font-size: 3em;
+  }
+
+  /* line 22, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_section.scss */
+  .menu-section-logo {
+    min-height: 500px;
+    min-width: 500px;
+    margin-bottom: 30px;
+    margin-top: 0px;
+  }
+
+  /* line 29, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/menu_section.scss */
+  .menu-section-header {
+    font-size: 3.5em !important;
+    border-bottom: 5px solid #EF5350 !important;
+  }
+}
+@media screen and (max-width: 1000px) {
+  /* line 2, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/section_option.scss */
+  .section-options-header {
+    font-size: 2.5em;
+  }
+
+  /* line 5, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/section_option.scss */
+  .section-options-entry {
+    font-size: 2.5em !important;
+  }
+}
+/* line 1, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+.side-bar-button {
+  justify-content: flex-start;
+  text-transform: none !important;
+  font-size: 20px;
+  width: 100%;
+  flex-direction: row;
+}
+
+/* line 9, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+.side-bar-list {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+}
+
+/* line 14, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+.side-bar-hidden {
+  height: 97vh;
+  z-index: 1;
+}
+
+/* line 19, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+.side-bar-show {
+  height: 97vh;
+  z-index: 10;
+}
+
+@media screen and (max-width: 1000px) {
+  /* line 25, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+  .side-bar-hidden {
+    transition: transform 120ms ease-in-out;
+    animation-timing-function: cubic-bezier(0.01, 0.98, 0.01, 1);
+    transform: translate3d(-62vw, 0px, 0px);
+    padding-right: 0px !important;
+    z-index: 100;
+  }
+
+  /* line 33, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+  .side-bar-show {
+    animation-timing-function: cubic-bezier(0.1, 0.8, 0.1, 1);
+    transition: transform 120ms ease-in-out;
+    transform: translate3d(0px, 0px, 0px);
+    padding-right: 0px !important;
+    z-index: 100;
+  }
+
+  /* line 40, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+  .side-bar-list {
+    display: flex;
+    width: 60vw;
+  }
+
+  /* line 45, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+  .side-bar-container {
+    position: fixed;
+  }
+
+  /* line 48, /home/andrew/WebApps/haya-sushi/app/assets/stylesheets/side_bar.scss */
+  .side-bar-button {
+    margin-bottom: 0px;
+    font-size: 3.5em !important;
+  }
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background-color: #212121;
+  color: #EF5350
+}

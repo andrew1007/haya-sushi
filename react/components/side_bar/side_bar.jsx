@@ -11,10 +11,6 @@ export default class SideBar extends Component {
     }
   }
 
-  show = () => {
-    this.setState({show: !this.state.show})
-  }
-
   render() {
     const { sections, handleSectionClick } = this.props
     const containerStyle = {
