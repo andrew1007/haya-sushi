@@ -12,7 +12,7 @@ const Home = props => {
   const textStyle = {
     margin: '10px'
   }
-  const infoRender = info.map((text, idx) => <div style={textStyle}>{text}</div>)
+  const infoRender = info.map((text, idx) => <div key={idx} style={textStyle}>{text}</div>)
   const infoStyle = {
     display: 'flex',
     flexDirection: 'column',
