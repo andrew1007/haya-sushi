@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 20180203002659) do
   enable_extension "plpgsql"
 
   create_table "carts", force: :cascade do |t|
-    t.string  "session_token", null: false
+    t.integer "user_id", null: false
     t.integer "item_id"
-    t.index ["session_token"], name: "index_carts_on_session_token", using: :btree
+    t.index ["user_id"], name: "index_carts_on_user_id", using: :btree
   end
 
   create_table "items", force: :cascade do |t|
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 20180203002659) do
   end
 
   create_table "options", force: :cascade do |t|
-    t.string  "title"
-    t.string  "name"
-    t.string  "details"
-    t.string  "price"
+    t.string  "title",         default: ""
+    t.string  "name",          default: ""
+    t.string  "details",       default: ""
+    t.string  "price",         default: ""
     t.integer "subsection_id"
     t.integer "section_id"
     t.index ["section_id"], name: "index_options_on_section_id", using: :btree
