@@ -5,7 +5,7 @@ class Section < ApplicationRecord
 
   def self.sections
     sections = {}
-    section_list = Section.all.includes(:items).includes(:options)
+    section_list = Section.all.includes(:items)
     subsection_hash = {}
     Subsection.all.each do |entry|
       subsection_hash[entry.id] = entry.name

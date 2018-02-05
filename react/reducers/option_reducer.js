@@ -7,7 +7,6 @@ const defaultState = {
 
 const OptionReducer = (state = defaultState, action) => {
   Object.freeze(state)
-  console.log(action.option);
   switch(action.type) {
     case 'GET_OPTIONS':
       const option = action.option

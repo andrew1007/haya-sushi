@@ -74,6 +74,7 @@ class AppPresentational extends Component {
     const headerStyle = {
       display: 'flex',
     }
+    console.log(this.props.menu);
     return (
       <div style={appStyle}>
         <div style={transparentLayerStyle} onClick={this.toggleSidebar}/>
