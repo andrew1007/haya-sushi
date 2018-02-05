@@ -3,24 +3,25 @@ class Api::CartsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    @cart = current_user.cart.pluck(:name, :item_id)
+    @cart = current_user.cart.pluck(:item_id, :name).to_h
     render :show
   end
 
   def create
-    debugger
     @cart_item = Cart.new({
       user_id: current_user.id,
       item_id: cart_params.to_i
     })
     @cart_item.save!
-    render :create
+    @cart = current_user.cart.pluck(:name, :item_id)
+    render :show
   end
 
   def destroy
     cart_entry = Cart.find_by({item_id: cart_params[:item_id]})
     cart_entry.destroy
-    render :create
+    @cart = current_user.cart.pluck(:name, :item_id)
+    render :show
   end
 
   private

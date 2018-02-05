@@ -7,7 +7,7 @@ class Section < ApplicationRecord
     sections = {}
     section_list = Section.all.includes(:items)
     subsection_hash = {}
-    Subsection.all.each do |entry|
+    section_list.each do |entry|
       subsection_hash[entry.id] = entry.name
     end
     keys = [:id, :description, :name, :price, :spiciness, :discount, :section_id, :subsection_id]

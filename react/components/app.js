@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { getSections } from '../actions/section_actions'
 import { getOptions } from '../actions/option_actions'
+import { getCart, createCartItem, deleteCartItem } from '../actions/cart_actions'
 import { connect } from 'react-redux'
 import AppHeader from './app_header/app_header'
 import SideBar from './side_bar/side_bar'
 import MenuSectionList from './menu_section/menu_section_list'
-import Button from 'material-ui/Button';
+import Button from 'material-ui/Button'
 import Home from './home/home'
 
 class AppPresentational extends Component {
@@ -20,10 +21,15 @@ class AppPresentational extends Component {
   }
 
   async componentWillMount() {
-    const {getSections, getOptions} = this.props
-    await Promise.all([getSections(), getOptions()])
+    this.actionTest()
+    const {getSections, getOptions, getCart} = this.props
+    await Promise.all([getSections(), getOptions(), getCart()])
     const defaultSection = 'Info'
     this.setState({currentSection: defaultSection, loaded: true})
+  }
+
+  actionTest() {
+    // this.props.createCartItem({item_id: 1})
   }
 
   handleSectionClick = (name) => {
@@ -74,7 +80,7 @@ class AppPresentational extends Component {
     const headerStyle = {
       display: 'flex',
     }
-    console.log(this.props.menu);
+    console.log(this.props);
     return (
       <div style={appStyle}>
         <div style={transparentLayerStyle} onClick={this.toggleSidebar}/>
@@ -94,14 +100,16 @@ class AppPresentational extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     getSections: _ => dispatch(getSections()),
-    getOptions: _ => dispatch(getOptions())
+    getOptions: _ => dispatch(getOptions()),
+    getCart: _ => dispatch(getCart())
   }
 }
 
 const mapStateToProps = state => {
   return {
     menu: state.menu,
-    option: state.option
+    option: state.option,
+    cart: state.cart
   }
 }
 

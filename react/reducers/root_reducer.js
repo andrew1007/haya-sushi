@@ -1,17 +1,12 @@
 import { combineReducers } from 'redux'
 import SectionReducer from './section_reducer'
 import OptionReducer from './option_reducer'
-
-const DummyReducer = (state = {}, action) => {
-  switch(action.type) {
-    default:
-      return state
-  }
-}
+import CartReducer from './cart_reducer'
 
 const RootReducer = combineReducers({
   menu: SectionReducer,
-  option: OptionReducer
+  option: OptionReducer,
+  cart: CartReducer
 })
 
 export default RootReducer

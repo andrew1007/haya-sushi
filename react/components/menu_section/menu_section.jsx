@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import MenuItem from '../menu_item/menu_item'
 import MenuSectionHeader from './menu_section_header'
 import SectionOptionList from '../section_options/section_option_list'
+import { connect } from 'react-redux'
 
-export default class MenuSection extends Component {
+class MenuSectionPresentational extends Component {
   constructor() {
     super()
     this.state = { hidden: true }
@@ -27,16 +28,16 @@ export default class MenuSection extends Component {
 
   render() {
     const {section, currentSection, subSection, option, hasSubsection} = this.props
+    const cart = this.props.cart || {}
     const itemSublistProps = {section, subSection}
     const toggleHidden = hasSubsection ? this.toggleHidden : null
     const header = hasSubsection ? subSection : currentSection
     const headerProps = {header, toggleHidden, hasSubsection }
     const optionProps = {option}
     const listStyle = this.state.hidden ? {height: '0px', overflow: 'hidden'} : {}
-    console.log(this.props.section);
     const menuItems = section.map((item, idx) => {
       let {id, description, name, price, spiciness} = item
-      let menuItemProps = {id, description, name, price, spiciness}
+      let menuItemProps = {id, description, name, price, spiciness, saved: !!cart[id]}
       return <MenuItem key={idx} {...menuItemProps} />
     })
     return (
@@ -50,3 +51,13 @@ export default class MenuSection extends Component {
     )
   }
 }
+
+const mapStateToProps = ({cart}) => {
+  return {cart}
+}
+
+const MenuSection = connect(
+  null, mapStateToProps
+)(MenuSectionPresentational)
+
+export default MenuSection
