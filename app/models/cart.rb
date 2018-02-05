@@ -4,4 +4,7 @@ class Cart < ActiveRecord::Base
     item_ids = Cart.where({session_token: token}).pluck(:item_id)
     Item.where({id: item_ids})
   end
+
+  belongs_to :user
+  belongs_to :item
 end

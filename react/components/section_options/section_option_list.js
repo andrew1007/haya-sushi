@@ -4,6 +4,7 @@ import SectionOptionEntry from './section_option_entry'
 const SectionOptionList = props => {
   const {details, title} = props.option
   const midIdx = Math.floor(details.length / 2) + 1
+  console.log(details);
   const left = details.slice(0, midIdx).map(([name, price], idx) => {
     let optionEntryProps = {name, price}
     return <SectionOptionEntry key={idx} {...optionEntryProps}/>

@@ -33,6 +33,7 @@ export default class MenuSection extends Component {
     const headerProps = {header, toggleHidden, hasSubsection }
     const optionProps = {option}
     const listStyle = this.state.hidden ? {height: '0px', overflow: 'hidden'} : {}
+    console.log(this.props.section);
     const menuItems = section.map((item, idx) => {
       let {id, description, name, price, spiciness} = item
       let menuItemProps = {id, description, name, price, spiciness}

@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resource :section, only: [:show]
     resource :option, only: [:show]
+    resource :cart, only: [:show]
   end
 end

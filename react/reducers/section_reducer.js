@@ -4,6 +4,7 @@ const defaultState = {}
 
 const SectionReducer = (state = defaultState, action) => {
   Object.freeze(state)
+  console.log(action.sections);
   switch(action.type) {
     case 'GET_SECTIONS':
       return action.sections
