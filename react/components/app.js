@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { getSections } from '../actions/section_actions'
 import { getOptions } from '../actions/option_actions'
-import { getCart, createCartItem, deleteCartItem } from '../actions/cart_actions'
+import { getCart } from '../actions/cart_actions'
 import { connect } from 'react-redux'
 import AppHeader from './app_header/app_header'
 import SideBar from './side_bar/side_bar'
 import MenuSectionList from './menu_section/menu_section_list'
 import Button from 'material-ui/Button'
 import Home from './home/home'
+import SavedItems from './saved_items/saved_items'
 
 class AppPresentational extends Component {
 
@@ -21,15 +22,10 @@ class AppPresentational extends Component {
   }
 
   async componentWillMount() {
-    this.actionTest()
     const {getSections, getOptions, getCart} = this.props
     await Promise.all([getSections(), getOptions(), getCart()])
-    const defaultSection = 'Info'
+    const defaultSection = 'Saved Items'
     this.setState({currentSection: defaultSection, loaded: true})
-  }
-
-  actionTest() {
-    // this.props.createCartItem({item_id: 1})
   }
 
   handleSectionClick = (name) => {
@@ -46,18 +42,25 @@ class AppPresentational extends Component {
   }
 
   render() {
+    const savedItems = `Saved Items`
+    const savedItemsProps = {
+      cart: this.props.cart
+    }
+    console.log(savedItemsProps);
     const sideBarProps = {
       handleSectionClick: this.handleSectionClick,
-      sections: ['Info'].concat(Object.keys(this.props.menu)),
+      sections: ['Info', savedItems].concat(Object.keys(this.props.menu)),
       showSidebar: this.state.showSidebar
     }
     const menuSectionProps = {
-      menuItems: this.props.menu[this.state.currentSection] || [{}],
+      menuItems: this.props.menu[this.state.currentSection] || [],
       option: this.props.option,
       currentSection: this.state.currentSection,
       showSidebar: this.state.showSidebar,
-      toggleSidebar: this.toggleSidebar
+      toggleSidebar: this.toggleSidebar,
+      cart: this.props.cart
     }
+    console.log(this.state.currentSection);
     const appHeaderProps = {
       toggleSidebar: this.toggleSidebar
     }
@@ -80,7 +83,15 @@ class AppPresentational extends Component {
     const headerStyle = {
       display: 'flex',
     }
-    console.log(this.props);
+    let pageRender
+    const selection = this.state.currentSection
+    if (selection === 'Info') {
+      pageRender = <Home/>
+    } else if (selection === savedItems) {
+      pageRender = <SavedItems {...savedItemsProps}/>
+    } else {
+      pageRender = <MenuSectionList {...menuSectionProps}/>
+    }
     return (
       <div style={appStyle}>
         <div style={transparentLayerStyle} onClick={this.toggleSidebar}/>
@@ -90,7 +101,7 @@ class AppPresentational extends Component {
           <div className='app-sidebar-filler'/>
           <SideBar {...sideBarProps}/>
             <div style={transparentLayerStyle} onClick={this.toggleSidebar}></div>
-          {this.state.currentSection === 'Info' ? <Home/> : <MenuSectionList {...menuSectionProps}/> }
+          {pageRender}
         </div>
       </div>
     )
@@ -101,7 +112,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getSections: _ => dispatch(getSections()),
     getOptions: _ => dispatch(getOptions()),
-    getCart: _ => dispatch(getCart())
+    getCart: _ => dispatch(getCart()),
   }
 }
 

@@ -6,18 +6,6 @@ export const getCart = _ => dispatch => {
   })
 }
 
-export const createCartItem = cartItemId => dispatch => {
-  return ApiCartCreateRequest(cartItemId).then(cart => {
-    return dispatch(actionCreatorCartGet(cart))
-  })
-}
-
-export const deleteCartItem = itemId => dispatch => {
-  return ApiCartDeleteRequest(itemId).then(cart => {
-    return dispatch(actionCreatorCartGet(cart))
-  })
-}
-
 const actionCreatorCartGet = cart => {
   return {
     type: GET_CART,

@@ -3,7 +3,7 @@ class Api::CartsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    @cart = current_user.cart.pluck(:item_id, :name).to_h
+    @cart = current_user.cart
     render :show
   end
 
@@ -13,15 +13,14 @@ class Api::CartsController < ApplicationController
       item_id: cart_params.to_i
     })
     @cart_item.save!
-    @cart = current_user.cart.pluck(:name, :item_id)
-    render :show
+    @cart = current_user.cart.pluck(:name, :item_id).to_h
+    render :create
   end
 
   def destroy
-    cart_entry = Cart.find_by({item_id: cart_params[:item_id]})
-    cart_entry.destroy
-    @cart = current_user.cart.pluck(:name, :item_id)
-    render :show
+    Cart.destroy_all({item_id: cart_params.to_i})
+    @cart = current_user.cart.pluck(:name, :item_id).to_h
+    render :create
   end
 
   private

@@ -1,4 +1,4 @@
-.menu-section-list-container {
+.menu-section-container {
   min-width: 550px;
   max-width: 550px;
 }
@@ -7,8 +7,13 @@
   margin-top: -200px;
 }
 
+.menu-section-subtotal {
+  float: right;
+  font-size: 30px;
+}
+
 @media screen and (max-width: 1000px) {
-  .menu-section-list-container {
+  .menu-section-container {
     max-width: none;
     width: 94vw;
     margin-left: 3vw;

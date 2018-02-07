@@ -11,7 +11,7 @@ export default class MenuSectionHeader extends Component {
   }
 
   render() {
-    const {hasSubsection, header, toggleHidden} = this.props
+    const {hasSubsection, header, toggleHidden, headerOptions} = this.props
     let style
     style = {
       borderBottom: '1px solid #EF5350',
@@ -31,6 +31,7 @@ export default class MenuSectionHeader extends Component {
       return (
         <ListItem className='menu-section-header' style={style} onClick={toggleHidden}>
           {header}
+          {headerOptions}
         </ListItem>
       )
     }
