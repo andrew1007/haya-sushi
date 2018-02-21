@@ -35,7 +35,6 @@ class MenuItemPresentational extends Component {
     const cartIconStyle = {
       margin:'0px',
       padding:'0px',
-      minWidth:'50px'
     }
     const cartIconAdd = "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
     const cartIconRemove = "M19 13H5v-2h14v2z"
@@ -43,10 +42,10 @@ class MenuItemPresentational extends Component {
     return (
       <div style={containerStyle} key={this.props.id} ref={(ctx) => {this.menuItem = ctx}}>
         <div style={{display:'flex'}}>
-          <Button style={cartIconStyle} onClick={() => this.handleCartItemClick()}>
-            <svg xmlns="http://www.w3.org/2000/svg"
-              fill="#EF5350" className='menu-item-svg' viewBox="0 0 24 24">
-              <path d={saved ? cartIconRemove : cartIconAdd}/>
+          <Button className='menu-item-button' style={cartIconStyle} onClick={() => this.handleCartItemClick()}>
+            <svg className='menu-item-svg' xmlns="http://www.w3.org/2000/svg"
+              fill="#EF5350" viewBox="0 0 24 24">
+              <path className='menu-item-svg' d={saved ? cartIconRemove : cartIconAdd}/>
             </svg>
           </Button>
           <div style={itemNameStyle}>
