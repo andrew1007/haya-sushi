@@ -24,7 +24,7 @@ class AppPresentational extends Component {
   async componentWillMount() {
     const {getSections, getOptions, getCart} = this.props
     await Promise.all([getSections(), getOptions(), getCart()])
-    const defaultSection = 'Saved Items'
+    const defaultSection = 'Info'
     this.setState({currentSection: defaultSection, loaded: true})
   }
 
