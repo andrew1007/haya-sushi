@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     user = User.find_by_session_token(session[:session_token])
+    debugger
     if user
       @current_user = user
     else
