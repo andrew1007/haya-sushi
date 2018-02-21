@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 class SavedItemsPresentational extends Component {
 
   render() {
-    console.log(this.props);
     const menuSectionProps = {
       section: this.props.cart,
       cart: this.props.cart,
@@ -19,11 +18,14 @@ class SavedItemsPresentational extends Component {
     const subtotalContainerStyle = {
       width: '100%'
     }
+    const subtotalStyle = sum > 0 ? {} : {fontSize: '25px'}
     return (
       <div className='menu-section-container'>
         <MenuSection {...menuSectionProps}/>
         <div className='menu-section-container' style={subtotalContainerStyle}>
-          <div className='menu-section-subtotal'>Subtotal: {sum}</div>
+          <div className='menu-section-subtotal' style={subtotalStyle}>
+            {sum > 0 ? `Subtotal: ${sum}` : `Click on the + symbols next to menu items to add to saved items!`}
+          </div>
         </div>
       </div>
     )

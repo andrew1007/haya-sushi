@@ -46,21 +46,19 @@ class AppPresentational extends Component {
     const savedItemsProps = {
       cart: this.props.cart
     }
-    console.log(savedItemsProps);
     const sideBarProps = {
       handleSectionClick: this.handleSectionClick,
       sections: ['Info', savedItems].concat(Object.keys(this.props.menu)),
       showSidebar: this.state.showSidebar
     }
-    const menuSectionProps = {
+    const menuSectionListProps = {
       menuItems: this.props.menu[this.state.currentSection] || [],
       option: this.props.option,
       currentSection: this.state.currentSection,
       showSidebar: this.state.showSidebar,
       toggleSidebar: this.toggleSidebar,
-      cart: this.props.cart
+      cart: this.props.cart,
     }
-    console.log(this.state.currentSection);
     const appHeaderProps = {
       toggleSidebar: this.toggleSidebar
     }
@@ -90,7 +88,7 @@ class AppPresentational extends Component {
     } else if (selection === savedItems) {
       pageRender = <SavedItems {...savedItemsProps}/>
     } else {
-      pageRender = <MenuSectionList {...menuSectionProps}/>
+      pageRender = <MenuSectionList {...menuSectionListProps}/>
     }
     return (
       <div style={appStyle}>

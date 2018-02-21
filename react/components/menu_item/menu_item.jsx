@@ -7,8 +7,6 @@ import { getCart, ApiCartCreateRequest, ApiCartDeleteRequest } from '../../actio
 import Button from 'material-ui/Button'
 
 class MenuItemPresentational extends Component {
-  componentWillMount() {
-  }
 
   async handleCartItemClick() {
     if (this.props.saved) {
@@ -41,12 +39,13 @@ class MenuItemPresentational extends Component {
     }
     const cartIconAdd = "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
     const cartIconRemove = "M19 13H5v-2h14v2z"
+    // fill="#EF5350" width={symbolDimensions} height={symbolDimensions} viewBox="0 0 24 24">
     return (
-      <div style={containerStyle} key={this.props.id}>
+      <div style={containerStyle} key={this.props.id} ref={(ctx) => {this.menuItem = ctx}}>
         <div style={{display:'flex'}}>
           <Button style={cartIconStyle} onClick={() => this.handleCartItemClick()}>
             <svg xmlns="http://www.w3.org/2000/svg"
-              fill="#EF5350" width="35" height="35" viewBox="0 0 24 24">
+              fill="#EF5350" className='menu-item-svg' viewBox="0 0 24 24">
               <path d={saved ? cartIconRemove : cartIconAdd}/>
             </svg>
           </Button>

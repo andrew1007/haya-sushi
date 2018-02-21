@@ -15,9 +15,7 @@
 @media screen and (max-width: 1000px) {
   .menu-section-container {
     max-width: none;
-    width: 94vw;
-    margin-left: 3vw;
-    margin-right: 3vw;
+    width: 95vw;
   }
 
   .menu-section-info {
@@ -34,5 +32,9 @@
   .menu-section-header {
     font-size: 3.5em !important;
     border-bottom: 5px solid #EF5350 !important;
+  }
+
+  .menu-section-subtotal {
+    font-size: 50px;
   }
 }

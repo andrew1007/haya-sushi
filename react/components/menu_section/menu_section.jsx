@@ -27,10 +27,9 @@ export default class MenuSection extends Component {
   }
 
   render() {
-    const {currentSection, subSection, option, hasSubsection} = this.props
+    const {currentSection, subSection, option, hasSubsection } = this.props
     const headerOptions = this.props.headerOptions || null
     const section = this.props.section || []
-    console.log(section);
     const cart = this.props.cart || []
     const cartIds = new Set(cart.map((entry) => entry.id))
     const itemSublistProps = {section, subSection}
@@ -41,7 +40,7 @@ export default class MenuSection extends Component {
     const listStyle = this.state.hidden ? {height: '0px', overflow: 'hidden'} : {}
     const menuItems = section.map((item, idx) => {
       let {id, description, name, price, spiciness} = item
-      let menuItemProps = {id, description, name, price, spiciness, saved: cartIds.has(id)}
+      let menuItemProps = { id, description, name, price, spiciness, saved: cartIds.has(id)}
       return <MenuItem key={Math.random()} {...menuItemProps} />
     })
     return (

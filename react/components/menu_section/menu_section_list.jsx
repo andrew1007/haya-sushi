@@ -12,12 +12,11 @@ const MenuSectionList = props => {
   const partitioned = props.menuItems.partitionObjectsByKey('subsection')
   const sectionOption = props.option[props.currentSection] || {details: [], title: null}
   const hasSubsection = partitioned.length > 1
-  const currentSection = props.currentSection
-  const cart = props.cart
+  const { currentSection, cart } = props
   const menuItems = partitioned.map((section, id) => {
     let subSection = section[0].subsection
     let option = props.option[subSection] || {details: [], title: null}
-    let subsectionProps = {section, subSection, id, hasSubsection, option, currentSection, cart}
+    let subsectionProps = { section, subSection, id, hasSubsection, option, currentSection, cart}
     return <div key={id}>
       <MenuSection {...subsectionProps}/>
     </div>
