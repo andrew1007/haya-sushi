@@ -4,15 +4,16 @@ class Api::CartsController < ApplicationController
 
   def show
     @cart = current_user.cart
+    # render json: {cart: @cart}
     render :show
   end
 
   def create
-    @cart_item = Cart.new({
+    cart_item = Cart.new({
       user_id: current_user.id,
       item_id: cart_params.to_i
     })
-    @cart_item.save!
+    cart_item.save!
     @cart = current_user.cart.pluck(:name, :item_id).to_h
     render :create
   end

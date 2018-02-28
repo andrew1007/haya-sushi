@@ -3,14 +3,16 @@ import MenuItem from '../menu_item/menu_item'
 import MenuSectionHeader from './menu_section_header'
 import SectionOptionList from '../section_options/section_option_list'
 import { connect } from 'react-redux'
+import { getCart } from '../../actions/cart_actions'
 
-export default class MenuSection extends Component {
+class MenuSectionPresentational extends Component {
   constructor() {
     super()
     this.state = { hidden: true }
   }
 
   componentWillMount() {
+    this.props.getCart()
     if (!this.props.hasSubsection) {
       this.setState({hidden: false})
     }
@@ -55,12 +57,14 @@ export default class MenuSection extends Component {
   }
 }
 
-// const mapStateToProps = ({cart}) => {
-//   return {cart}
-// }
-//
-// const MenuSection = connect(
-//   null, mapStateToProps
-// )(MenuSectionPresentational)
-//
-// export default MenuSection
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCart: _ => dispatch(getCart())
+  }
+}
+
+const MenuSection = connect(
+  null, mapDispatchToProps
+)(MenuSectionPresentational)
+
+export default MenuSection

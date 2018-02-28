@@ -1,20 +1,36 @@
 import React, { Component } from 'react'
 import MenuSection from '../menu_section/menu_section'
 import { connect } from 'react-redux'
+import { getCart } from '../../actions/cart_actions'
 
 class SavedItemsPresentational extends Component {
+  constructor() {
+    super()
+    this.state = {
+      cart: {[""]: []}
+    }
+  }
+
+  handleDelete() {
+
+  }
+
+  async componentWillMount() {
+    await this.props.getCart()
+    this.setState({saved: this.props.cart})
+  }
 
   render() {
     const menuSectionProps = {
-      section: this.props.cart,
-      cart: this.props.cart,
+      section: this.state.cart,
+      cart: this.state.cart,
       currentSection: 'Saved Items',
       subSection: null,
       option: {details:[], title: null},
       hasSubsection: false,
-      headerOptions: `    ${Object.values(this.props.cart).length}`
+      headerOptions: `    ${Object.values(this.state.cart).length}`
     }
-    const sum = this.props.cart.map((entry) => parseFloat(entry.price)).reduce((a, b) => a + b, 0).toFixed(2)
+    const sum = this.state.cart.map((entry) => parseFloat(entry.price)).reduce((a, b) => a + b, 0).toFixed(2)
     const subtotalContainerStyle = {
       width: '100%'
     }
@@ -36,9 +52,15 @@ const mapStateToProps = ({cart}) => {
   return { cart }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCart: _ => dispatch(getCart())
+  }
+}
+
 const SavedItems = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(SavedItemsPresentational)
 
 export default SavedItems
